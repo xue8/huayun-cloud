@@ -1,0 +1,30 @@
+spring:
+#  rabbitmq 配置信息
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+global:
+  rabbitmq:
+    exchange: huayun.fanout
+    routing-key:
+
+  huayun:
+    access-key-id: 36c34ff3094b4dec9786dcc35d1f0d41
+    access-key-secret: b87e24ad3b00420fadec14a9260ca94e
+    request-api-url: https://api.chinac.com/
+
+  cloud:
+    cpu: 100
+    memory: 101
+    disk-used: 102
+    io-read: 103
+    io-write: 104
+    iops-read: 105
+    iops-write: 106
+    fip-in: 107
+    fip-out: 108
+

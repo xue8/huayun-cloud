@@ -1,0 +1,51 @@
+spring:
+  # rabbitmq 配置信息
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+  # elasticsearch 配置信息
+  elasticsearch:
+    jest:
+      uris: http://127.0.0.1:9200
+  # 数据源配置
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/huayun?serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # Druid 配置
+    initial-size: 8 #初始化连接大小
+    min-idle: 5 #最小空闲连接数
+    max-active: 10 #最大连接数
+    query-timeout: 6000 #查询超时时间
+    transaction-query-timeout: 6000 #事务查询超时时间
+    remove-abandoned-timeout: 1800 #关闭空闲连接超时时间
+    filters: stat,config
+
+server:
+  port: 8081
+
+global:
+  cloud:
+    cpu: 100
+    memory: 101
+    disk-used: 102
+    io-read: 103
+    io-write: 104
+    iops-read: 105
+    iops-write: 106
+    fip-in: 107
+    fip-out: 108
+#    dubbo 配置
+dubbo:
+  application:
+    name: huayun-search
+
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  scan:
+    base-packages: cn.ddnd.huayun.es.service

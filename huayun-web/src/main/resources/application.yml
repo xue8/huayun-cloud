@@ -1,0 +1,18 @@
+#    dubbo 配置
+dubbo:
+  application:
+    name: huayun-web
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  scan:
+    base-packages: cn.ddnd.huayun.huayun.service
+
+spring:
+  redis:
+    host: 127.0.0.1
+
+global:
+  huayun:
+    access-key-id: 36c34ff3094b4dec9786dcc35d1f0d41
+    access-key-secret: b87e24ad3b00420fadec14a9260ca94e
+    request-api-url: https://api.chinac.com/
