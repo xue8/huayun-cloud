@@ -17,6 +17,11 @@ public class CloudServiceImpl implements CloudService {
     @Reference
     SearchService searchService;
 
+    /**
+     * 查询云服务器的历史状态，通过 Dubbo RPC 调用 huyun-search 模块的方法
+     * @param request
+     * @return
+     */
     @Override
     @Cacheable("cloud")
     public List<CloudInfo> search(CloudRequest request) {

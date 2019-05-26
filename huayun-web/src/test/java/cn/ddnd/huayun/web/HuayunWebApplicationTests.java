@@ -21,6 +21,8 @@ public class HuayunWebApplicationTests {
     CloudManageService cloudManage;
     @Autowired
     CheckIdentityService checkIdentityService;
+    @Autowired
+    CloudManageService cloudManageService;
 
     @Test
     public void contextLoads() {

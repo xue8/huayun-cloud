@@ -2,10 +2,15 @@ package cn.ddnd.huayun.web.request.Execute;
 
 import cn.ddnd.huayun.web.ioc.ApplicationUtil;
 import cn.ddnd.huayun.web.config.Global;
+import cn.ddnd.huayun.web.pojo.CloudResponse;
 import cn.ddnd.huayun.web.request.OkHttpRequest;
 import cn.ddnd.huayun.web.request.OkHttpRequestImpl;
+import com.alibaba.fastjson.JSON;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,4 +46,16 @@ public abstract class ExecuteRequest {
     }
 
     public abstract Object execute(Map parameter);
+
+    public Object doExecute() {
+        Request request = okHttpRequest.getRequestUrl(map);
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            CloudResponse cloudResponse = JSON.parseObject(response.body().string(), CloudResponse.class);
+            return cloudResponse;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

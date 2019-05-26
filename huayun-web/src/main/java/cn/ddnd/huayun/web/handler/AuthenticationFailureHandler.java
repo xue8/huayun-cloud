@@ -15,7 +15,7 @@ public class AuthenticationFailureHandler {
     @ExceptionHandler(AuthenticationFailureException.class)
     @ResponseBody
     public String handler() {
-        return "\"{\\\"error\\\":\\\"Authentication failure\\\"}\"";
+        return "{\"error\":\"Authentication failure\"}";
     }
 
 }

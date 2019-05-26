@@ -12,6 +12,9 @@ import java.util.Map;
 @Service
 public class CheckIdentityServiceImpl implements CheckIdentityService {
 
+    /**
+      * 身份验证，校验 accessKeyId 和 accessKey 是否正确
+     */
     @Override
     public Object check(String accessKeyId, String accessKey) {
         ExecuteRequest executeRequest = new ExecuteRequestCheckIdentity();

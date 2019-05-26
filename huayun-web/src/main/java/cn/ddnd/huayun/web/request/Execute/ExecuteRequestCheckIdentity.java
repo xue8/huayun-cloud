@@ -15,6 +15,11 @@ public class ExecuteRequestCheckIdentity extends ExecuteRequest{
     @Autowired
     RedisTemplate redisTemplate;
 
+    /**
+     * 身份验证请求的执行
+     * @param parameter
+     * @return
+     */
     @Override
     public Object execute(Map parameter) {
         map.put("AccessKey", parameter.get("AccessKey"));
@@ -22,7 +27,11 @@ public class ExecuteRequestCheckIdentity extends ExecuteRequest{
         map.put("Region", "cn-suzhou1");
 
         map.putAll(parameter);
+        return doExecute();
+    }
 
+    @Override
+    public Object doExecute() {
         Request request = okHttpRequest.getRequestUrl(map);
         try {
             Response response = okHttpClient.newCall(request).execute();
@@ -37,5 +46,4 @@ public class ExecuteRequestCheckIdentity extends ExecuteRequest{
         }
         return null;
     }
-
 }

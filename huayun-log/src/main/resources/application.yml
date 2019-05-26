@@ -6,6 +6,10 @@ spring:
     username: guest
     password: guest
     virtual-host: /
+  elasticsearch:
+    jest:
+#      password: 760oA4j7BDLDDU2dUcer
+#      username: elastic
 
 global:
   rabbitmq:
@@ -28,3 +32,16 @@ global:
     fip-in: 107
     fip-out: 108
 
+# elasticsearch watcher 监控报警插件 163邮箱设置
+watcher.actions.email.service.account:
+  work:
+    profile: standard
+    email_defaults:
+      from: 'dodoname@163.com'
+    smtp:
+      auth: true
+      starttls.enable: true
+      host: smtp.163.com
+      port: 25
+      user: dodoname@163.com
+      password: 123456AA
