@@ -23,6 +23,7 @@ public class LoginController {
     @PostMapping("login")
     public String login(@RequestParam("accessKeyId") String accessKeyId,
                         @RequestParam("accessKey") String accessKey,
+                        @RequestParam("username") String username,
                         HttpSession session) {
         Map map = new HashMap<>();
         map.put("accessKeyId", accessKeyId);

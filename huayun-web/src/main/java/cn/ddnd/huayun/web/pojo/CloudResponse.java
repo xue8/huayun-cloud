@@ -91,4 +91,20 @@ public class CloudResponse {
     public void setInstanceVncUrl(Object instanceVncUrl) {
         this.instanceVncUrl = instanceVncUrl;
     }
+
+    @Override
+    public String toString() {
+        return "CloudResponse{" +
+                "taskId='" + taskId + '\'' +
+                ", action='" + action + '\'' +
+                ", totalCount=" + totalCount +
+                ", instanceSet=" + instanceSet +
+                ", instanceSnapshotId=" + instanceSnapshotId +
+                ", instanceSnapshotSet=" + instanceSnapshotSet +
+                ", firewallId=" + firewallId +
+                ", instanceVncUrl=" + instanceVncUrl +
+                ", imageSet=" + imageSet +
+                ", imageId=" + imageId +
+                '}';
+    }
 }

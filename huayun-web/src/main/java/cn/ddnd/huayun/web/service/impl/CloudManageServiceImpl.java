@@ -1,10 +1,16 @@
 package cn.ddnd.huayun.web.service.impl;
 
+import cn.ddnd.huayun.web.pojo.Cloud;
 import cn.ddnd.huayun.web.request.Execute.*;
 import cn.ddnd.huayun.web.service.CloudManageService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -16,7 +22,7 @@ public class CloudManageServiceImpl implements CloudManageService {
      * @return 返回主机详细信息
      */
     @Override
-    public Object queryCloud(String accessKeyId, String accessKey, String region) {
+    public Object queryCloud(String accessKeyId, String accessKey, String region, String instanceId) {
 
         ExecuteRequest cloudInfo = new ExecuteRequestCloudInfo();
         Map map = new HashMap();
@@ -24,8 +30,50 @@ public class CloudManageServiceImpl implements CloudManageService {
         map.put("Action", "DescribeInstances");
         map.put("AccessKeyId", accessKeyId);
         map.put("AccessKey", accessKey);
+        if (instanceId != null && !instanceId.equals("")) {
+            map.put("Id.0", instanceId);
+        }
         Object object = cloudInfo.execute(map);
-        return object;
+        if (instanceId != null && !instanceId.equals("")) {
+            return object;
+        }
+        String jsonStr = JSON.toJSONString(object);
+        Map<String, Object> map1 = (Map) JSON.parse(jsonStr);
+        List list = (List) map1.get("instanceSet");
+        if (list == null)
+            return "{\"data\": []}";
+        List<Cloud> result = new ArrayList<>();
+        for (Object object1 : list) {
+            Map map2 = (Map) object1;
+            Cloud cloud = new Cloud();
+            cloud.setId((String) map2.get("Id"));
+            cloud.setName((String) map2.get("Name"));
+            List list1 = (List) map2.get("Internet");
+            for (Object object2 : list1) {
+                Map map3 = (Map) object2;
+                cloud.setPublicIp(cloud.getPublicIp() + ";" + map3.get("IpAddress"));
+                cloud.setBandWidth((Integer) map3.get("Bandwidth"));
+            }
+            cloud.setPublicIp(cloud.getPublicIp().replaceAll("null;", ""));
+            List list2 = (List) map2.get("InterfaceSet");
+            for (Object object2 : list2) {
+                Map map3 = (Map) object2;
+                cloud.setPrivateIp(cloud.getPrivateIp() + ";" + map3.get("IpAddress"));
+            }
+            cloud.setPrivateIp(cloud.getPrivateIp().replaceAll("null;", ""));
+            cloud.setSeriesName((String) map2.get("SeriesName"));
+            cloud.setCpu((Integer) map2.get("Cpu"));
+            cloud.setMemory((Integer) map2.get("Memory"));
+            cloud.setMemory((Integer) map2.get("Memory"));
+            cloud.setOsName((String) map2.get("OsName"));
+            cloud.setStatus((String) map2.get("Status"));
+            cloud.setDueTime((String) map2.get("DueTime"));
+            cloud.setProductStatus((String) map2.get("ProductStatus"));
+            result.add(cloud);
+        }
+        Map map2 = new HashMap();
+        map2.put("data", result);
+        return map2;
     }
 
     /**

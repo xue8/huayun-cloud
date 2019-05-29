@@ -4,10 +4,7 @@ import cn.ddnd.huayun.web.service.CloudManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -23,20 +20,18 @@ public class CloudManageController {
 
     @GetMapping("query")
     public Object query(@RequestParam("region") String region,
-                        HttpSession session) {
-        System.out.println("----------------");
-        String sessionId = session.getId();
+                        @Nullable @RequestParam("instanceId") String instanceId,
+                        @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
-        return cloudManage.queryCloud(accessKeyId, accessKey, region);
+        return cloudManage.queryCloud(accessKeyId, accessKey, region, instanceId);
     }
 
     @GetMapping("start")
-    public Object query(@RequestParam("region") String region,
+    public Object start(@RequestParam("region") String region,
                         @RequestParam("id") String id,
-                        HttpSession session) {
-        String sessionId = session.getId();
+                        @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -45,9 +40,8 @@ public class CloudManageController {
 
     @GetMapping("stop")
     public Object stop(@RequestParam("region") String region,
-                        @RequestParam("id") String id,
-                        HttpSession session) {
-        String sessionId = session.getId();
+                       @RequestParam("id") String id,
+                       @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -56,10 +50,9 @@ public class CloudManageController {
 
     @GetMapping("reboot")
     public Object reboot(@RequestParam("region") String region,
-                       @RequestParam("id") String id,
-                       @RequestParam("force") boolean force,
-                       HttpSession session) {
-        String sessionId = session.getId();
+                         @RequestParam("id") String id,
+                         @RequestParam("force") boolean force,
+                         @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -69,8 +62,7 @@ public class CloudManageController {
     @GetMapping("delete")
     public Object delete(@RequestParam("region") String region,
                          @RequestParam("id") String id,
-                         HttpSession session) {
-        String sessionId = session.getId();
+                         @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -81,8 +73,7 @@ public class CloudManageController {
     public Object password(@RequestParam("region") String region,
                            @RequestParam("id") String id,
                            @Nullable @RequestParam("password") String password,
-                           HttpSession session) {
-        String sessionId = session.getId();
+                           @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -95,8 +86,7 @@ public class CloudManageController {
                            @RequestParam("id") String id,
                            @RequestParam("imageId") String imageId,
                            @Nullable @RequestParam("password") String password,
-                           HttpSession session) {
-        String sessionId = session.getId();
+                           @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -107,8 +97,7 @@ public class CloudManageController {
     public Object modify(@RequestParam("region") String region,
                            @RequestParam("id") String id,
                            @RequestParam("name") String name,
-                           HttpSession session) {
-        String sessionId = session.getId();
+                         @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -118,8 +107,7 @@ public class CloudManageController {
     @GetMapping("vnc")
     public Object modify(@RequestParam("region") String region,
                          @RequestParam("id") String id,
-                         HttpSession session) {
-        String sessionId = session.getId();
+                         @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -131,8 +119,7 @@ public class CloudManageController {
                          @RequestParam("id") String id,
                          @RequestParam("period") String period,
                          @RequestParam("payType") String payType,
-                         HttpSession session) {
-        String sessionId = session.getId();
+                         @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -143,8 +130,7 @@ public class CloudManageController {
     public Object resize(@RequestParam("region") String region,
                          @RequestParam("id") String id,
                          @RequestParam("instanceType") String instanceType,
-                         HttpSession session) {
-        String sessionId = session.getId();
+                         @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -155,8 +141,7 @@ public class CloudManageController {
     public Object firewallId(@RequestParam("region") String region,
                          @RequestParam("id") String id,
                          @RequestParam("firewallId") String firewallId,
-                         HttpSession session) {
-        String sessionId = session.getId();
+                             @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");

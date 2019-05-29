@@ -4,10 +4,7 @@ import cn.ddnd.huayun.web.service.CloudSnapshotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -27,8 +24,8 @@ public class CloudSnapshotController {
                         @RequestParam("createType") String createType,
                         @RequestParam("name") String name,
                         @RequestParam("description") String description,
-                        HttpSession session) {
-        String sessionId = session.getId();
+                        @RequestHeader("sessionId") String sessionId) {
+        
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -39,8 +36,8 @@ public class CloudSnapshotController {
     @GetMapping("delete")
     public Object delete(@RequestParam("region") String region,
                         @RequestParam("snapshotId") String snapshotId,
-                        HttpSession session) {
-        String sessionId = session.getId();
+                        @RequestHeader("sessionId") String sessionId) {
+        
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -50,8 +47,8 @@ public class CloudSnapshotController {
     @GetMapping("query")
     public Object query(@RequestParam("region") String region,
                         @Nullable @RequestParam("id") String id,
-                        HttpSession session) {
-        String sessionId = session.getId();
+                        @RequestHeader("sessionId") String sessionId) {
+        
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -61,8 +58,8 @@ public class CloudSnapshotController {
     @GetMapping("apply")
     public Object apply(@RequestParam("region") String region,
                         @RequestParam("snapshotId") String snapshotId,
-                        HttpSession session) {
-        String sessionId = session.getId();
+                        @RequestHeader("sessionId") String sessionId) {
+        
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
