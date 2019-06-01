@@ -10,6 +10,12 @@ dubbo:
 spring:
   redis:
     host: 127.0.0.1
+  mail:
+    host: smtp.163.com
+    username: dodoname@163.com
+    password: 123123qwe
+    protocol: smtp
+    properties: {"mail.smtp.auth":"true", "mail.smtp.ssl.enable":"true", "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory"}
 
 global:
   huayun:

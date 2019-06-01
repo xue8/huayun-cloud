@@ -34,4 +34,9 @@ public class LoginController {
         return "{\"sessionId\":\"" + session.getId() + "\"}";
     }
 
+    @GetMapping("a")
+    public void a(){
+        System.out.println("-----------------------------------");
+    }
+
 }
