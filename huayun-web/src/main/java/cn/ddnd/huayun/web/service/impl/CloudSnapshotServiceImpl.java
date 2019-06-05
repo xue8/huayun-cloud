@@ -69,15 +69,15 @@ public class CloudSnapshotServiceImpl implements CloudSnapshotService {
      * @return
      */
     @Override
-    public Object queryCloudSnapshot(String accessKeyId, String accessKey, String region, String id) {
+    public Object queryCloudSnapshot(String accessKeyId, String accessKey, String region, String id, String snapshotId) {
         ExecuteRequest start = new ExecuteRequestCloudQuerySnapshots();
         Map map = new HashMap();
         map.put("Region", region);
         map.put("Action", "DeleteInstanceSnapshot");
         map.put("AccessKeyId", accessKeyId);
         map.put("AccessKey", accessKey);
-        if (id != null && id.equals(""))
-            map.put("InstanceId.0", id);
+        map.put("Id.0", snapshotId);
+        map.put("InstanceId.0", id);
         Object object = start.execute(map);
         return object;
     }

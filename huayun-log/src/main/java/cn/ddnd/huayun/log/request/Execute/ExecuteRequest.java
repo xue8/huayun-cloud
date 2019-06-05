@@ -6,8 +6,6 @@ import cn.ddnd.huayun.log.request.OkHttpRequest;
 import cn.ddnd.huayun.log.request.OkHttpRequestImpl;
 import cn.ddnd.huayun.log.service.RabbitmqService;
 import okhttp3.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

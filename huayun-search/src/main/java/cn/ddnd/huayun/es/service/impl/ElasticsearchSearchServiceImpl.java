@@ -17,7 +17,6 @@ public class ElasticsearchSearchServiceImpl implements ElasticsearchSearchServic
     ElasticsearchService elasticsearchDao;
     SearchServiceImpl searchDao;
 
-
     public ElasticsearchSearchServiceImpl(SearchServiceImpl searchDao) {
         this.elasticsearchDao = (ElasticsearchServiceImpl) ApplicationUtil.getBean(ElasticsearchServiceImpl.class);
         this.searchDao = searchDao;

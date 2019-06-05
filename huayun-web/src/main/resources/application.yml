@@ -11,16 +11,46 @@ spring:
   redis:
     host: 127.0.0.1
   mail:
-    host: smtp.163.com
-    username: dodoname@163.com
-    password: 123123qwe
+    host: smtp.qq.com
+    username: 35249297@qq.com
+    password: gzhogknhbmfebgbi #123123qwe
     protocol: smtp
     properties: {"mail.smtp.auth":"true", "mail.smtp.ssl.enable":"true", "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory"}
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/huayun?serverTimezone=UTC
+    type: com.alibaba.druid.pool.DruidDataSource
+    # Druid 配置
+    initial-size: 8 #初始化连接大小
+    min-idle: 5 #最小空闲连接数
+    max-active: 10 #最大连接数
+    query-timeout: 6000 #查询超时时间
+    transaction-query-timeout: 6000 #事务查询超时时间
+    remove-abandoned-timeout: 1800 #关闭空闲连接超时时间
+    filters: stat,config
+#    rabbitMQ 配置
+  rabbitmq:
+    virtual-host: /
+    username: guest
+    password: guest
+    host: 127.0.0.1
+    port: 5672
+
 
 global:
   huayun:
     access-key-id: 36c34ff3094b4dec9786dcc35d1f0d41
     access-key-secret: b87e24ad3b00420fadec14a9260ca94e
     request-api-url: https://api.chinac.com/
+  rabbitmq:
+    exchange: huayun.direct
+    routing-key:
+  monitor:
+    title: wwre
+    email: 35249297@qq.com
+
+
 server:
   port: 80

@@ -118,7 +118,7 @@ public class CloudManageController {
     public Object period(@RequestParam("region") String region,
                          @RequestParam("id") String id,
                          @RequestParam("period") String period,
-                         @RequestParam("payType") String payType,
+                         @Nullable @RequestParam("payType") String payType,
                          @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");

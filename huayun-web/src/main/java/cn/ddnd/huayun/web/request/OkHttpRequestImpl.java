@@ -1,6 +1,7 @@
 package cn.ddnd.huayun.web.request;
 
 import cn.ddnd.huayun.web.config.Global;
+import okhttp3.Request;
 
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class OkHttpRequestImpl implements OkHttpRequest {
     public okhttp3.Request getRequestUrl(Map<String, String> parameters) {
         Signature signature = new Signature();
         String accessKey = parameters.get("AccessKey");
-        String url = Global.requesApiUrl;
+        String url = Global.requestApiUrl;
         String requestUrl = signature.getSignature(parameters, accessKey);
         requestUrl = url + "?" + requestUrl;
         okhttp3.Request request = new okhttp3.Request.Builder()
@@ -26,5 +27,15 @@ public class OkHttpRequestImpl implements OkHttpRequest {
                 .url(requestUrl)
                 .build();
         return request;
+    }
+
+    @Override
+    public Request putMonitorRequest(String monitorName, String n) {
+        return null;
+    }
+
+    @Override
+    public Request deleteMonitorRequest(Map<String, String> parameters) {
+        return null;
     }
 }

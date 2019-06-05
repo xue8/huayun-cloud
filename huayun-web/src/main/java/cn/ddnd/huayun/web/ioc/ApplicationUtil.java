@@ -1,16 +1,19 @@
 package cn.ddnd.huayun.web.ioc;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
-@Configuration
-public class ApplicationUtil {
+import java.util.Map;
+
+@Component
+public class ApplicationUtil implements ApplicationContextAware {
 
     static ApplicationContext applicationContext;
 
-    @Autowired
-    public void setApplicationContext(ApplicationContext applicationContext) {
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         ApplicationUtil.applicationContext = applicationContext;
     }
 
@@ -20,6 +23,11 @@ public class ApplicationUtil {
 
     public static Object getBean(Class c) {
         return applicationContext.getBean(c);
+    }
+
+    public static String[] a(Class c) {
+        String[] strings  = applicationContext.getBeanNamesForType(c);
+        return strings;
     }
 
     public static ApplicationContext getApplicationContext() {

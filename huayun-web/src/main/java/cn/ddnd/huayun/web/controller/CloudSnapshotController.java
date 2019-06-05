@@ -46,13 +46,14 @@ public class CloudSnapshotController {
 
     @GetMapping("query")
     public Object query(@RequestParam("region") String region,
-                        @Nullable @RequestParam("id") String id,
+                        @RequestParam("id") String id,
+                        @RequestParam("snapshotId") String snapshotId,
                         @RequestHeader("sessionId") String sessionId) {
         
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
-        return snapshotService.queryCloudSnapshot(accessKeyId, accessKey, region, id);
+        return snapshotService.queryCloudSnapshot(accessKeyId, accessKey, region, id, snapshotId);
     }
 
     @GetMapping("apply")

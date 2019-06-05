@@ -25,10 +25,11 @@ public class CheckAuthentication {
     HttpSession session;
 
     /**
-     * 代理除了登录的controller，进行身份验证
+     * 对除了登录的 controller 进行身份验证
      */
     @Pointcut(value = "execution(public * cn.ddnd.huayun.web.controller.*.*(..)) " +
-            "&& !execution(public * cn.ddnd.huayun.web.controller.LoginController.*(..))")
+            "&& !execution(public * cn.ddnd.huayun.web.controller.LoginController.*(..))" +
+            "&& !execution(public * cn.ddnd.huayun.web.controller.MonitorController.*(..))")
     public void controller() {
     }
 
@@ -40,26 +41,6 @@ public class CheckAuthentication {
         String sessionId = request.getHeader("sessionId");
         if (!stringRedisTemplate.hasKey("user:" + sessionId))
             throw new AuthenticationFailureException();
-
-//        String sessionId = session.getId();
-//        if (!stringRedisTemplate.hasKey("user:" + sessionId))
-//            throw new AuthenticationFailureException();
-//        return;
     }
-
-//    @Around(value = "controller()")
-//    public void check(ProceedingJoinPoint proceedingJoinPoint) {
-//        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-//        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-//        HttpServletRequest request = sra.getRequest();
-//        String sessionId = request.getHeader("sessionId");
-//        if (!stringRedisTemplate.hasKey("user:" + sessionId))
-//            throw new AuthenticationFailureException();
-//        try {
-//            proceedingJoinPoint.proceed();
-//        } catch (Throwable throwable) {
-//            throwable.printStackTrace();
-//        }
-//    }
 
 }

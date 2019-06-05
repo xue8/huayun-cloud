@@ -12,6 +12,9 @@ import java.net.UnknownHostException;
 @Configuration
 public class Redis {
 
+    /**
+      * 设置 redis 序列化规则
+     */
     @Bean
     public StringRedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
         StringRedisTemplate template = new StringRedisTemplate();

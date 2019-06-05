@@ -22,8 +22,8 @@ public class CloudLogController {
     CloudService cloudService;
 
     @GetMapping("info")
-    public Object cpu(@RequestParam("index") String index,
-                      @RequestParam("type") String type,
+    public Object info(@RequestParam("index") String index,
+                       @Nullable @RequestParam("type") String type,
                       @RequestParam("username") String username,
                       @RequestParam("id") String id,
                       @Nullable @RequestParam("startDatetime") String startDatetime,
@@ -35,7 +35,7 @@ public class CloudLogController {
         CloudRequest request = new CloudRequest();
         request.setUsername(username);
         request.setIndex(index);
-        request.setType(type);
+        request.setType("_doc");
         request.setId(id);
         request.setStartDatetime(startDatetime);
         request.setEndDatetime(endDatetime);
@@ -50,4 +50,5 @@ public class CloudLogController {
         result.put("index", index);
         return JSON.toJSONString(result);
     }
+
 }

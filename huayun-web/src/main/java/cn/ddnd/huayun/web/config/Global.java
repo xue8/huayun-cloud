@@ -7,11 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class Global {
 
-//    public static String exchange;
-//    public static String routingkey;
-    public static String requesApiUrl;
+    public static String exchange;
+    public static String routingkey;
+    public static String requestApiUrl;
     public static String accessKeyId;
     public static String accessKeySecret;
+    public static String elasticsearchMonitorUrl;
+    public static String monitorTitle;
+    public static String monitorEmail;
 //    public static Integer cloudCpu;
 //    public static Integer cloudMemory;
 //    public static Integer cloudDiskUsed;
@@ -22,15 +25,15 @@ public class Global {
 //    public static Integer cloudFipIn;
 //    public static Integer cloudFipOut;
 
-//    @Value("${global.rabbitmq.exchange}")
-//    private void setExchange(String exchange) {
-//        this.exchange = exchange;
-//    }
-//
-//    @Value("${global.rabbitmq.routing-key}")
-//    private void setRoutingkey(String routingkey) {
-//        this.routingkey = routingkey;
-//    }
+    @Value("${global.rabbitmq.exchange}")
+    private void setExchange(String exchange) {
+        this.exchange = exchange;
+    }
+
+    @Value("${global.rabbitmq.routing-key}")
+    private void setRoutingkey(String routingkey) {
+        this.routingkey = routingkey;
+    }
 
     @Value("${global.huayun.access-key-id}")
     private void setAccessKeyId(String accessKeyId) {
@@ -40,6 +43,21 @@ public class Global {
     @Value("${global.huayun.access-key-secret}")
     private void setAccessKeySecret(String accessKeySecret) {
         Global.accessKeySecret = accessKeySecret;
+    }
+
+//    @Value("${global.elasticsearch.monitor-url}")
+//    private void setElasticsearchMonitorUrl(String elasticsearchMonitorUrl) {
+//        Global.elasticsearchMonitorUrl = elasticsearchMonitorUrl;
+//    }
+
+    @Value("${global.monitor.title}")
+    private void setMonitorTitle(String monitorTitle) {
+        Global.monitorTitle = monitorTitle;
+    }
+
+    @Value("${global.monitor.email}")
+    private void setMonitorEmail(String monitorEmail) {
+        Global.monitorEmail = monitorEmail;
     }
 
 //    @Value("${global.cloud.cpu}")
@@ -89,6 +107,6 @@ public class Global {
 
     @Value("${global.huayun.request-api-url}")
     private void setRequesApiUrl(String url) {
-        Global.requesApiUrl = url;
+        Global.requestApiUrl = url;
     }
 }

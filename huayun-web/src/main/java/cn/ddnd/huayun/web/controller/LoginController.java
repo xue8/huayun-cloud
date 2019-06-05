@@ -2,8 +2,8 @@ package cn.ddnd.huayun.web.controller;
 
 import cn.ddnd.huayun.web.service.CheckIdentityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -35,8 +35,11 @@ public class LoginController {
     }
 
     @GetMapping("a")
-    public void a(){
+    public void a(@Nullable @RequestParam String a,
+                  @Nullable @RequestBody String b){
         System.out.println("-----------------------------------");
+        System.out.println(a);
+        System.out.println(b);
     }
 
 }

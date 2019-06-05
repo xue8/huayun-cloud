@@ -2,6 +2,7 @@ package cn.ddnd.huayun.log.ioc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -12,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  **/
 
 @Configuration
-public class ApplicationUtil {
+public class ApplicationUtil  implements ApplicationContextAware {
 
     static ApplicationContext applicationContext;
 

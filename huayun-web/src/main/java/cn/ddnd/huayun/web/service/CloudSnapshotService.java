@@ -6,6 +6,6 @@ public interface CloudSnapshotService {
     Object createCloudSnapshot(String accessKeyId, String accessKey, String region, String id,
                                String createType, String name, String description);
     Object deleteCloudSnapshot(String accessKeyId, String accessKey, String region, String snapshotId);
-    Object queryCloudSnapshot(String accessKeyId, String accessKey, String region, String id);
+    Object queryCloudSnapshot(String accessKeyId, String accessKey, String region, String id, String snapshotId);
     Object applyCloudSnapshot(String accessKeyId, String accessKey, String region, String snapshotId);
 }

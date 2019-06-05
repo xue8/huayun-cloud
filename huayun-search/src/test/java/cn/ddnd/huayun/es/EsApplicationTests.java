@@ -6,6 +6,8 @@ import cn.ddnd.huayun.es.service.SearchService;
 import cn.ddnd.huayun.es.service.impl.SearchServiceImpl2;
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import io.searchbox.client.JestClient;
+import io.searchbox.client.JestClientFactory;
+import io.searchbox.client.config.HttpClientConfig;
 import io.searchbox.indices.CreateIndex;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,13 +23,15 @@ public class EsApplicationTests {
 
     @Autowired
     SearchService searchService;
-    @Autowired
-    SearchServiceImpl2 searchServiceImpl2;
+//    @Autowired
+//    SearchServiceImpl2 searchServiceImpl2;
 
     @Test
     public void contextLoads() {
         Object o = searchService.search("cloud_cpu", "_doc", "xue8",
                 "i-zz6rj39kty724", true);
+        Object o1 = searchService.search("cloud_cpu", "_doc", "xue8",
+                "i-zz6rj39kty724","","", true);
         System.out.println();
     }
 
