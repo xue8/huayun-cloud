@@ -1,11 +1,5 @@
 package cn.ddnd.huayun.log.pojo;
 
-/**
- * @program: huayun
- * @description:
- * @author: Xue 8
- * @create: 2019-05-23 11:27
- **/
 
 public class Cloud {
     String taskId;

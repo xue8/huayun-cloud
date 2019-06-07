@@ -22,10 +22,10 @@ public class MonitorController {
                         @RequestParam("cycle") Integer cycle,
                         @RequestParam("type") Integer type,
                         @RequestParam("threshold") Double threshold,
-                        @RequestParam("total") Double total,
                         @RequestParam("username") String username,
-                          @RequestParam("phone") Long phone,
-                          @RequestParam("email") String email) {
+                          @RequestParam("phone") String phone,
+                          @RequestParam("email") String email,
+                          @RequestHeader("sessionId") String sessionId) {
         MonitorInfo monitorInfo = new MonitorInfo();
         monitorInfo.setCycle(cycle);
         monitorInfo.setId(id);
@@ -33,7 +33,6 @@ public class MonitorController {
         monitorInfo.setTime(time);
         monitorInfo.setType(type);
         monitorInfo.setThreshold(threshold);
-        monitorInfo.setTotal(total);
         monitorInfo.setUsername(username);
         monitorInfo.setPhone(phone);
         monitorInfo.setEmail(email);
@@ -42,13 +41,21 @@ public class MonitorController {
     }
 
     @DeleteMapping("/monitor")
-    public Object delete(@RequestParam("id") String id) {
-        return monitorService;
+    public Object delete(@RequestParam("id") String id,
+                         @RequestHeader("sessionId") String sessionId) {
+        return monitorService.deleteMonitorInfoById(id);
+    }
+
+    @GetMapping("/monitorAll")
+    public Object monitorAll(@RequestParam("username") String username,
+                             @RequestHeader("sessionId") String sessionId) {
+        return monitorService.findMonitorInfoByUsername(username);
     }
 
 
     @GetMapping("/monitor/record")
-    public Object record(@RequestParam("username") String username) {
+    public Object record(@RequestParam("username") String username,
+                         @RequestHeader("sessionId") String sessionId) {
         return monitorRecordService.findMonitorRecordByUsername(username);
     }
 }

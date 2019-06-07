@@ -2,6 +2,8 @@ package cn.ddnd.huayun.web.service;
 
 public interface CloudManageService {
     Object queryCloud(String accessKeyId, String accessKey, String region, String instanceId);
+    Object queryCloud(String accessKeyId, String accessKey);
+    Object queryCloudStatus(String accessKeyId, String accessKey);
     Object startCloud(String accessKeyId, String accessKey, String region, String id);
     Object stopCloud(String accessKeyId, String accessKey, String region, String id);
     Object rebootCloud(String accessKeyId, String accessKey, String region, String id, boolean force);

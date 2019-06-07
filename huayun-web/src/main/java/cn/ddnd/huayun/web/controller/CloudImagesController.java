@@ -5,10 +5,7 @@ import cn.ddnd.huayun.web.service.CloudSnapshotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -28,8 +25,7 @@ public class CloudImagesController {
                         @RequestParam("volumeType") String volumeType,
                         @RequestParam("name") String name,
                         @RequestParam("description") String description,
-                        HttpSession session) {
-        String sessionId = session.getId();
+                         @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -40,8 +36,7 @@ public class CloudImagesController {
     @GetMapping("delete")
     public Object delete(@RequestParam("region") String region,
                         @RequestParam("imagesId") String imagesId,
-                        HttpSession session) {
-        String sessionId = session.getId();
+                         @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");
@@ -51,8 +46,7 @@ public class CloudImagesController {
     @GetMapping("query")
     public Object query(@RequestParam("region") String region,
                         @Nullable @RequestParam("imagesId") String imagesId,
-                        HttpSession session) {
-        String sessionId = session.getId();
+                        @RequestHeader("sessionId") String sessionId) {
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
         String accessKeyId = map.get("accessKeyId");
         String accessKey = map.get("accessKey");

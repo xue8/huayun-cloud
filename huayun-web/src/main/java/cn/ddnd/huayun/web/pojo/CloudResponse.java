@@ -11,6 +11,33 @@ public class CloudResponse {
     Object instanceVncUrl;
     Object imageSet;
     Object imageId;
+    Object routerSet;
+    Object routerInterfaceSet;
+    Object data;
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public Object getRouterInterfaceSet() {
+        return routerInterfaceSet;
+    }
+
+    public void setRouterInterfaceSet(Object routerInterfaceSet) {
+        this.routerInterfaceSet = routerInterfaceSet;
+    }
+
+    public Object getRouterSet() {
+        return routerSet;
+    }
+
+    public void setRouterSet(Object routerSet) {
+        this.routerSet = routerSet;
+    }
 
     public Object getImageSet() {
         return imageSet;

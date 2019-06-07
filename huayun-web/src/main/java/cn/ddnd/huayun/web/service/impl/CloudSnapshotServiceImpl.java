@@ -73,11 +73,13 @@ public class CloudSnapshotServiceImpl implements CloudSnapshotService {
         ExecuteRequest start = new ExecuteRequestCloudQuerySnapshots();
         Map map = new HashMap();
         map.put("Region", region);
-        map.put("Action", "DeleteInstanceSnapshot");
+        map.put("Action", "DescribeInstanceSnapshots");
         map.put("AccessKeyId", accessKeyId);
         map.put("AccessKey", accessKey);
-        map.put("Id.0", snapshotId);
-        map.put("InstanceId.0", id);
+        if (snapshotId != null && !snapshotId.equals(""))
+            map.put("Id.0", snapshotId);
+        if (id != null && !id.equals(""))
+            map.put("InstanceId.0", id);
         Object object = start.execute(map);
         return object;
     }

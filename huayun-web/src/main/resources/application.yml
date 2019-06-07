@@ -4,16 +4,19 @@ dubbo:
     name: huayun-web
   registry:
     address: zookeeper://127.0.0.1:2181
+    timeout: 50000
   scan:
     base-packages: cn.ddnd.huayun.huayun.service
+  consumer:
+    timeout: 50000
 
 spring:
   redis:
     host: 127.0.0.1
   mail:
-    host: smtp.qq.com
-    username: 35249297@qq.com
-    password: gzhogknhbmfebgbi #123123qwe
+    host: smtp.163.com
+    username: dodoname@163.com
+    password: 123123qwe #gzhogknhbmfebgbi #123123qwe
     protocol: smtp
     properties: {"mail.smtp.auth":"true", "mail.smtp.ssl.enable":"true", "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory"}
   datasource:
@@ -37,6 +40,9 @@ spring:
     password: guest
     host: 127.0.0.1
     port: 5672
+  elasticsearch:
+    jest:
+      read-timeout: 9s
 
 
 global:
@@ -44,12 +50,15 @@ global:
     access-key-id: 36c34ff3094b4dec9786dcc35d1f0d41
     access-key-secret: b87e24ad3b00420fadec14a9260ca94e
     request-api-url: https://api.chinac.com/
+    region: cn-suzhou1, cn-huaian, cn-beijing1, cn-guangzhou1, cn-chengdu, cn-anxi, cn-sz-meisheng
   rabbitmq:
     exchange: huayun.direct
     routing-key:
   monitor:
-    title: wwre
-    email: 35249297@qq.com
+    title: 云主机告急提示 【华云】
+    email: dodoname@163.com
+  msm:
+    app-code: 0a3e3bbf4b5f4f7599063eabb424ab76
 
 
 server:

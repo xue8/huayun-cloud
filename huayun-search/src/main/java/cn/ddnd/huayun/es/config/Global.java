@@ -3,13 +3,6 @@ package cn.ddnd.huayun.es.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-/**
- * @program: huayun
- * @description: 配置信息
- * @author: Xue 8
- * @create: 2019-05-21 16:58
- **/
-
 @Component
 public class Global {
 

@@ -14,6 +14,9 @@ public class MonitorRequest {
         this.builder = builder;
     }
 
+    /**
+      * 监控请求
+     */
     public String getRequest() {
         String json = "{\n" +
                 "    \"actions\":{\n" +

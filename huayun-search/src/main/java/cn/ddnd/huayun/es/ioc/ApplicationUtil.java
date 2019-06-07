@@ -5,13 +5,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-/**
- * @program: huayun
- * @description: ioc容器工具类
- * @author: Xue 8
- * @create: 2019-05-23 14:00
- **/
-
 @Component
 public class ApplicationUtil implements ApplicationContextAware {
 

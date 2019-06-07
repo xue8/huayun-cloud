@@ -3,6 +3,8 @@ package cn.ddnd.huayun.web.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Component
 public class Global {
@@ -15,6 +17,8 @@ public class Global {
     public static String elasticsearchMonitorUrl;
     public static String monitorTitle;
     public static String monitorEmail;
+    public static List region;
+    public static String appCode;
 //    public static Integer cloudCpu;
 //    public static Integer cloudMemory;
 //    public static Integer cloudDiskUsed;
@@ -60,7 +64,18 @@ public class Global {
         Global.monitorEmail = monitorEmail;
     }
 
-//    @Value("${global.cloud.cpu}")
+    @Value("${global.huayun.region}")
+    private void setRegion(List region) {
+        Global.region = region;
+    }
+
+    @Value("${global.msm.app-code}")
+    private void setAppCode(String appCode) {
+        Global.appCode = appCode;
+    }
+
+
+    //    @Value("${global.cloud.cpu}")
 //    private void setCloudCpu(Integer cloudCpu) {
 //        Global.cloudCpu = cloudCpu;
 //    }

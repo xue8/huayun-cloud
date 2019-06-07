@@ -4,18 +4,21 @@ import cn.ddnd.huayun.log.pojo.Cloud;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @program: huayun
- * @description: 数据格式化
- * @author: Xue 8
- * @create: 2019-05-23 16:53
- **/
 public class CloudFipMessageHandleImpl implements MessageHandle{
 
+    /**
+     * 解析数据
+     * @param msg
+     * @param typeName
+     * @return
+     */
     @Override
     public Map handle(String msg, String typeName) {
         JSONObject jsonObject = JSONObject.parseObject(msg);
@@ -25,13 +28,21 @@ public class CloudFipMessageHandleImpl implements MessageHandle{
         Map map = (Map) list.get(0);
         String ip = (String) map.get("Ip");
         List list1 = (List) map.get("Data");
-        String dateTime = (String) ((List) list1.get(0)).get(0);
+        String datetime = (String) ((List) list1.get(0)).get(0);
         Double used = Double.valueOf(((List) list1.get(0)).get(1).toString());
 
         Map map1 = new HashMap();
         map1.put("index", "cloud");
         map1.put("username", "xue8");
-        map1.put("datetime", dateTime);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        try {
+            Date date = format.parse(datetime);
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            datetime = format1.format(date.getTime() + 28800000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        map1.put("datetime", datetime);
         map1.put("used",  used);
         map1.put("type", typeName);
         map1.put("id", "i-zz6rj39kty724");

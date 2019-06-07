@@ -13,13 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 
-/**
- * @program: huayun
- * @description: elasticsearch 索引文档相关操作
- * @author: Xue 8
- * @create: 2019-05-22 20:56
- **/
-
 @Repository
 public class ElasticsearchServiceImpl implements ElasticsearchService {
 

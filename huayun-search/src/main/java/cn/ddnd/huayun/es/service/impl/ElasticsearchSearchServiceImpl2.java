@@ -6,13 +6,6 @@ import cn.ddnd.huayun.es.service.ElasticsearchService;
 import io.searchbox.core.SearchResult;
 import org.springframework.stereotype.Service;
 
-/**
- * @program: huayun
- * @description: 云服务器Cpu文档相关操作
- * @author: Xue 8
- * @create: 2019-05-23 12:46
- **/
-
 @Service
 public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchService2 {
 
@@ -23,6 +16,17 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
         this.elasticsearchDao = (ElasticsearchServiceImpl) ApplicationUtil.getBean(ElasticsearchServiceImpl.class);
     }
 
+    /**
+     * 按照时间来检索
+     * @param index
+     * @param type
+     * @param username
+     * @param id
+     * @param startDatetime
+     * @param endDatetime
+     * @param sort
+     * @return
+     */
     @Override
     public SearchResult searchByDatetimeRange(String index, String type, String username, String id,
                                               String startDatetime, String endDatetime,boolean sort) {
@@ -66,12 +70,12 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                    "    \"sort\" : [\n" +
                     "    \t{\n" +
                     "    \t\t\"datetime\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t},\n" +
                     "    \t{\n" +
                     "    \t\t\"used\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t}\t\n" +
                     "    ]\n" +
@@ -114,7 +118,7 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \"sort\" : [\n" +
                     "    \t{\n" +
                     "    \t\t\"datetime\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t}\n" +
                     "    ]\n" +
@@ -166,12 +170,12 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \"sort\" : [\n" +
                     "    \t{\n" +
                     "    \t\t\"used\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t},\n" +
                     "    \t{\n" +
                     "    \t\t\"datetime\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t}\t\n" +
                     "    ]\n" +
@@ -214,7 +218,7 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \"sort\" : [\n" +
                     "    \t{\n" +
                     "    \t\t\"used\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t}\n" +
                     "    ]\n" +
@@ -279,12 +283,12 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \"sort\" : [\n" +
                     "    \t{\n" +
                     "    \t\t\"datetime\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t},\n" +
                     "    \t{\n" +
                     "    \t\t\"used\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t}\t\n" +
                     "    ]\n" +
@@ -341,12 +345,12 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \"sort\" : [\n" +
                     "    \t{\n" +
                     "    \t\t\"datetime\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t},\n" +
                     "    \t{\n" +
                     "    \t\t\"used\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t}\t\n" +
                     "    ]\n" +
@@ -365,12 +369,12 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \"sort\" : [\n" +
                     "    \t{\n" +
                     "    \t\t\"datetime\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t},\n" +
                     "    \t{\n" +
                     "    \t\t\"used\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t}\t\n" +
                     "    ]\n" +
@@ -381,7 +385,7 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \"sort\" : [\n" +
                     "    \t{\n" +
                     "    \t\t\"datetime\" : {\n" +
-                    "    \t\t\"order\" : \"desc\"\n" +
+                    "    \t\t\"order\" : \"asc\"\n" +
                     "    \t\t}\n" +
                     "    \t}\n" +
                     "    ]\n" +

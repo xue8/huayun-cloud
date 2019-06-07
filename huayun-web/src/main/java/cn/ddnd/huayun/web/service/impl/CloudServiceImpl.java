@@ -18,7 +18,7 @@ public class CloudServiceImpl implements CloudService {
     SearchService searchService;
 
     /**
-     * 查询云服务器的历史状态，通过 Dubbo RPC 调用 huyun-search 模块的方法
+     * 查询云服务器的性能数据，通过 Dubbo RPC 调用 huyun-search 模块的方法
      * @param request
      * @return
      */

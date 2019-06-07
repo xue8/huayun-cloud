@@ -34,8 +34,8 @@ public class MonitorScheduled {
     public void oneMinutes() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         Date date = new Date();
-        String var1 = format.format(date.getTime() - 28800000 - 60000);
-        String var2 = format.format(date.getTime() - 28800000 - 120000);
+        String var1 = format.format(date.getTime() - 60000);
+        String var2 = format.format(date.getTime() - 120000);
         List<MonitorInfo> monitorInfoList = monitorService.findMonitorInfoByTime(60);
         excute(monitorInfoList, var1, var2);
     }
@@ -47,8 +47,8 @@ public class MonitorScheduled {
     public void fiveMinutes() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         Date date = new Date();
-        String var1 = format.format(date.getTime() - 28800000 - 60000);
-        String var2 = format.format(date.getTime() - 28800000 - 120000);
+        String var1 = format.format(date.getTime() - 60000);
+        String var2 = format.format(date.getTime() - 120000);
         List<MonitorInfo> monitorInfoList = monitorService.findMonitorInfoByTime(300);
         excute(monitorInfoList, var1, var2);
     }

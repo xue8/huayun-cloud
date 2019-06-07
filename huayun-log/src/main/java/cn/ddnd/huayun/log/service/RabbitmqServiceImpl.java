@@ -8,17 +8,15 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @program: huayun
- * @description: 日志发布到 rabbitmq
- * @author: Xue 8
- * @create: 2019-05-22 16:16
- **/
 @Service
 public class RabbitmqServiceImpl implements RabbitmqService{
     @Autowired
     RabbitTemplate rabbitTemplate;
 
+    /**
+     * rabbitmq 消息发布
+     * @param message
+     */
     @Override
     public void publish(Map message) {
         System.out.println(message);

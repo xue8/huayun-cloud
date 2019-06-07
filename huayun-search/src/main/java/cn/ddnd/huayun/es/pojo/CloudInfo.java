@@ -2,13 +2,6 @@ package cn.ddnd.huayun.es.pojo;
 
 import java.io.Serializable;
 
-/**
- * @program: huayun
- * @description:
- * @author: Xue 8
- * @create: 2019-05-23 20:36
- **/
-
 public class CloudInfo implements Serializable {
     String datetime;
     String unit;

@@ -1,14 +1,14 @@
 package cn.ddnd.huayun.web.service.impl.monitor;
 
 import cn.ddnd.huayun.web.config.Global;
-import cn.ddnd.huayun.web.mail.EmailSender;
+import cn.ddnd.huayun.web.msm.AliyunSms;
+import cn.ddnd.huayun.web.msm.EmailSender;
 import cn.ddnd.huayun.web.mapper.MonitorRecordMapper;
 import cn.ddnd.huayun.web.pojo.CloudInfo;
 import cn.ddnd.huayun.web.pojo.MonitorInfo;
 import cn.ddnd.huayun.web.pojo.MonitorRecord;
 import cn.ddnd.huayun.web.service.MonitorService;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -29,7 +29,13 @@ public class MonitorServiceImpl implements MonitorService {
     EmailSender emailSender;
     @Autowired
     MonitorRecordMapper recordMapper;
+    @Autowired
+    AliyunSms aliyunSms;
 
+    /**
+     * 监听 rabbitMQ 的队列，将实时推送的消息进行计算、统计
+     * @param message
+     */
     @RabbitListener(queues = "huayun.monitor.info")
     @Override
     public void excute(Map message) {
@@ -49,14 +55,18 @@ public class MonitorServiceImpl implements MonitorService {
       * 在有一个周期满足条件的情况下报警
      */
     private void onlyOnce(MonitorInfo info, List<CloudInfo> cloudInfoList) {
-        Double threshold = info.getTotal() * info.getThreshold();
+//        Double threshold = info.getTotal() * info.getThreshold();
+        Double threshold = info.getThreshold();
         for (CloudInfo cloudInfo : cloudInfoList) {
-            if (cloudInfo.getUsed() >= threshold)
+            if (cloudInfo.getUsed() >= threshold) {
+                String str = "【华云比赛】尊敬的用户，您的云服务器Id：" + info.getId() + ", 资源" + info.getIndex() + "，使用率超过" + info.getThreshold() + "，请及时处理！";
+                aliyunSms.send(info.getPhone(), str);
                 emailSender.send(Global.monitorTitle,
                         "尊敬的华云用户，您好！您的云服务器id：" + info.getId() +
                                 "，资源：" + info.getIndex() + "，使用率超过" + info.getThreshold() + "%" +
                                 "，请及时处理！",
                         info.getEmail());
+            }
             record(info);
             break;
         }
@@ -66,14 +76,15 @@ public class MonitorServiceImpl implements MonitorService {
      * 在所有周期都满足条件的情况下报警
      */
     private void always(MonitorInfo info, List<CloudInfo> cloudInfoList) {
-        Double threshold = info.getTotal() * info.getThreshold();
+//        Double threshold = info.getTotal() * info.getThreshold();
+        Double threshold = info.getThreshold();
         String k = "monitor:" + info.getIndex() + ":" + info.getTime() + ":" + info.getId() + ":" + info.getMonitorInfoId();
         for (CloudInfo cloudInfo : cloudInfoList) {
             String v = "";
             v = stringRedisTemplate.opsForValue().get(k);
             if (v == null || v.equals("")) {
                 v = "0";
-                Long expire = (long) info.getCycle() * info.getTime() + 10;
+                Long expire = (long) info.getCycle() * info.getTime() + 5;
                 stringRedisTemplate.opsForValue().set(k, v, expire, TimeUnit.SECONDS);
             }
             if (cloudInfo.getUsed() >= threshold) {
@@ -82,9 +93,14 @@ public class MonitorServiceImpl implements MonitorService {
             }
         }
         String var1 = stringRedisTemplate.opsForValue().get(k);
+        System.out.println("-----------" + var1);
         if (Integer.valueOf(var1) >= info.getCycle()) {
+            String str = "【华云比赛】尊敬的用户，您的云服务器Id：" + info.getId() + ", 资源" + info.getIndex() + "，使用率超过" + info.getThreshold() + "，请及时处理！";
+            aliyunSms.send(info.getPhone(), str);
             emailSender.send(Global.monitorTitle,
-                    "ww",
+                    "尊敬的华云用户，您好！您的云服务器id：" + info.getId() +
+                            "，资源：" + info.getIndex() + "，使用率超过" + info.getThreshold() + "%" +
+                            "，请及时处理！",
                     info.getEmail());
             stringRedisTemplate.delete(k);
             record(info);
@@ -95,7 +111,8 @@ public class MonitorServiceImpl implements MonitorService {
      * 在周期内平均值满足条件的情况下报警
      */
     private void average(MonitorInfo info, List<CloudInfo> cloudInfoList) {
-        Double threshold = info.getTotal() * info.getThreshold();
+//        Double threshold = info.getTotal() * info.getThreshold();
+        Double threshold = info.getThreshold();
         String k = "monitor:" + info.getIndex() + ":" + info.getTime() + ":" + info.getId() + ":" + info.getMonitorInfoId();
 
         Double var1 = 0D;
@@ -108,19 +125,26 @@ public class MonitorServiceImpl implements MonitorService {
         v = stringRedisTemplate.opsForValue().get(k);
         if (v == null || v.equals("")) {
             v = String.valueOf(var1);
-            Long expire = (long) info.getCycle() * info.getTime() + 10;
+            Long expire = (long) info.getCycle() * info.getTime() + 5;
             stringRedisTemplate.opsForValue().set(k, v, expire, TimeUnit.SECONDS);
+            stringRedisTemplate.opsForValue().set(k + "_cycle", "1", expire, TimeUnit.SECONDS);
         } else {
             stringRedisTemplate.opsForValue().increment(k, var1);
+            stringRedisTemplate.opsForValue().increment(k + "_cycle");
         }
 
         Double var2 = Double.valueOf(stringRedisTemplate.opsForValue().get(k));
         Double avg = var2 / info.getCycle();
-        if (avg >= threshold) {
+        Integer var3 = Integer.valueOf(stringRedisTemplate.opsForValue().get(k + "_cycle"));
+        if (var3 >= info.getCycle() && avg >= threshold) {
             emailSender.send(Global.monitorTitle,
-                    "sadwedwd",
+                    "尊敬的华云用户，您好！您的云服务器id：" + info.getId() +
+                            "，资源：" + info.getIndex() + "%，使用率超过" + info.getThreshold() + "%" +
+                            "，请及时处理！",
                     info.getEmail());
             stringRedisTemplate.delete(k);
+            String str = "【华云比赛】尊敬的用户，您的云服务器Id：" + info.getId() + ", 资源" + info.getIndex() + "，使用率超过" + info.getThreshold() + "，请及时处理！";
+            aliyunSms.send(info.getPhone(), str);
             record(info);
         }
     }

@@ -11,14 +11,20 @@ import java.util.List;
 @Mapper
 public interface MonitorInfoMapper {
 
-    @Insert("INSERT INTO monitor_info(`index`, `time`, `cycle`, `type`, `threshold`, `total`, `id`, `username`, " +
+    @Insert("INSERT INTO monitor_info(`index`, `time`, `cycle`, `type`, `threshold`, `id`, `username`, " +
             "`phone`, `email`) " +
-            "VALUES(#{index}, #{time}, #{cycle}, #{type}, #{threshold}, #{total}, #{id}, #{username}, " +
+            "VALUES(#{index}, #{time}, #{cycle}, #{type}, #{threshold}, #{id}, #{username}, " +
             "#{phone}, #{email})")
     boolean insertMonitorInfo(MonitorInfo info);
 
     @Select("SELECT * FROM monitor_info WHERE `id` = #{id}")
     List<MonitorInfo> findMonitorInfoById(String id);
+
+    @Select("SELECT * FROM monitor_info WHERE `monitor_info_id` = #{monitor_info_id}")
+    List<MonitorInfo> findMonitorInfoByMonitorId(String monitor_info_id);
+
+    @Select("SELECT * FROM monitor_info WHERE `username` = #{username}")
+    List<MonitorInfo> findMonitorInfoByUsername(String username);
 
     @Select("SELECT * FROM monitor_info WHERE `id` = #{id} AND `time` = #{time}")
     List<MonitorInfo> findMonitorInfoByIdAndTime(String id, Integer time);

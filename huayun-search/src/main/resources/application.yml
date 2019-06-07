@@ -10,6 +10,7 @@ spring:
   elasticsearch:
     jest:
       uris: http://127.0.0.1:9200
+      read-timeout: 9s
   # 数据源配置
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/huayun?serverTimezone=UTC

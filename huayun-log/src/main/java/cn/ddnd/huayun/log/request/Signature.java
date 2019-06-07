@@ -11,14 +11,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
-/**
- * @program: huayun
- * @description: 签名
- * @author: Xue 8
- * @create: 2019-05-21 22:20
- **/
 public class Signature {
 
+    /**
+     * 签名函数
+     * @param parameters
+     * @param accessKey
+     * @return
+     */
     public String getSignature(Map<String, String> parameters, String accessKey) {
         String key = accessKey;
         StringBuffer sb = new StringBuffer();

@@ -8,19 +8,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-/**
- * @program: huayun
- * @description: elasticsearch消费者
- * @author: Xue 8
- * @create: 2019-05-22 17:12
- **/
-
 @Service
 public class RabbitmqElasticsearchServiceImpl implements RabbitmqService {
 
     @Autowired
     ElasticsearchService elasticsearchDao;
 
+    /**
+     * 监听 rabbitMQ，获取消息
+     * @param message
+     */
     @RabbitListener(queues = "huayun.es")
     @Override
     public void consumer(Map message) {

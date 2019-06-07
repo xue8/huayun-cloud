@@ -13,6 +13,9 @@ import java.util.Map;
 @Component
 public class ElasticsearchParse {
 
+    /**
+      * 解析数据
+     */
     public List<CloudInfo> parse(SearchResult searchResult) {
         try {
             List<CloudInfo> result = new ArrayList<>();

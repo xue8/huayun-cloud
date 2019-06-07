@@ -13,12 +13,11 @@ public class MonitorInfo implements Serializable {
     private Integer cycle;
     private Integer type;
     private Double threshold;
-    private Double total;
     private String id;
     private String username;
     private String monitorInfoId;
     private String email;
-    private Long phone;
+    private String phone;
 
     public String getId() {
         return id;
@@ -68,14 +67,6 @@ public class MonitorInfo implements Serializable {
         this.threshold = threshold;
     }
 
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -100,11 +91,11 @@ public class MonitorInfo implements Serializable {
         this.email = email;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -116,7 +107,6 @@ public class MonitorInfo implements Serializable {
                 ", cycle=" + cycle +
                 ", type='" + type + '\'' +
                 ", threshold=" + threshold +
-                ", total=" + total +
                 '}';
     }
 }

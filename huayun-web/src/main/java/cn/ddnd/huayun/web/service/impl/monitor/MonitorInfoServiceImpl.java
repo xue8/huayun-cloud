@@ -20,6 +20,7 @@ public class MonitorInfoServiceImpl implements MonitorInfoService {
 
     @Override
     public boolean insertMonitorInfo(MonitorInfo info) {
+        stringRedisTemplate.delete("monitor_info::" + info.getUsername());
         return monitorInfoMapper.insertMonitorInfo(info);
     }
 
@@ -27,6 +28,17 @@ public class MonitorInfoServiceImpl implements MonitorInfoService {
     @Override
     public List<MonitorInfo> findMonitorInfoById(String id) {
         return monitorInfoMapper.findMonitorInfoById(id);
+    }
+
+    @Override
+    public List<MonitorInfo> findMonitorInfoByMonitorId(String id) {
+        return monitorInfoMapper.findMonitorInfoByMonitorId(id);
+    }
+
+    @Cacheable("monitor_info")
+    @Override
+    public List<MonitorInfo> findMonitorInfoByUsername(String username) {
+        return monitorInfoMapper.findMonitorInfoByUsername(username);
     }
 
     @Cacheable("monitor_info")
@@ -43,7 +55,16 @@ public class MonitorInfoServiceImpl implements MonitorInfoService {
 
     @Override
     public boolean deleteMonitorInfoById(String id) {
-        stringRedisTemplate.delete("monitor_info");
+        List<MonitorInfo> list = this.findMonitorInfoByMonitorId(id);
+        String username = "";
+        if (list != null || list.size() != 0)
+            username = list.get(0).getUsername();
+        stringRedisTemplate.delete("monitor_info::" + username);
+        stringRedisTemplate.delete("monitor_info::60");
+        stringRedisTemplate.delete("monitor_info::300");
+        stringRedisTemplate.delete("monitor_info::900");
+        stringRedisTemplate.delete("monitor_info::1800");
+        stringRedisTemplate.delete("monitor_info::3600");
         return monitorInfoMapper.deleteMonitorInfo(id);
     }
 }

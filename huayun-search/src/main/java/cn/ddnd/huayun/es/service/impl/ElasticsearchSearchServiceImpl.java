@@ -5,13 +5,6 @@ import cn.ddnd.huayun.es.service.ElasticsearchSearchService;
 import cn.ddnd.huayun.es.ioc.ApplicationUtil;
 import io.searchbox.core.SearchResult;
 
-/**
- * @program: huayun
- * @description: 云服务器Cpu文档相关操作
- * @author: Xue 8
- * @create: 2019-05-23 12:46
- **/
-
 public class ElasticsearchSearchServiceImpl implements ElasticsearchSearchService {
 
     ElasticsearchService elasticsearchDao;
@@ -22,6 +15,10 @@ public class ElasticsearchSearchServiceImpl implements ElasticsearchSearchServic
         this.searchDao = searchDao;
     }
 
+    /**
+     * 按照时间来检索
+     * @return
+     */
     @Override
     public SearchResult searchByDatetimeRange() {
         String query = null;

@@ -5,12 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * @program: huayun
- * @description: 工具类
- * @author: Xue 8
- * @create: 2019-05-23 22:35
- **/
 public class Util {
 
     /**

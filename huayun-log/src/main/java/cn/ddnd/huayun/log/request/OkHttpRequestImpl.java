@@ -4,15 +4,14 @@ import cn.ddnd.huayun.log.config.Global;
 
 import java.util.Map;
 
-/**
- * @program: huayun
- * @description: 构造 OkHTTP request
- * @author: Xue 8
- * @create: 2019-05-21 22:16
- **/
 
 public class OkHttpRequestImpl implements OkHttpRequest {
 
+    /**
+     * 构造请求 URL
+     * @param parameters
+     * @return
+     */
     @Override
     public okhttp3.Request getRequestUrl(Map<String, String> parameters) {
         Signature signature = new Signature();

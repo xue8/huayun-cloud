@@ -23,13 +23,17 @@ public class RabbitmqMysqlServiceImpl implements RabbitmqService {
     @Autowired
     CloudMapper cloudMapper;
 
+    /**
+     * 监听 rabbitMQ，获取消息
+     * @param message
+     */
     @RabbitListener(queues = "huayun.persistence")
     @Override
     public void consumer(Map message) {
         Map<String, Object> map = message;
         Cloud cloud = new Cloud();
         String datetime = (String) map.get("datetime");
-        datetime = Util.UTCToCST(datetime);
+//        datetime = Util.UTCToCST(datetime);
         String unit = (String) map.get("unit");
         Double used = (Double) map.get("used");
         String username = (String) map.get("username");

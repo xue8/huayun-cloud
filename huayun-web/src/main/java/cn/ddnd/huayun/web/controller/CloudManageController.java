@@ -28,6 +28,22 @@ public class CloudManageController {
         return cloudManage.queryCloud(accessKeyId, accessKey, region, instanceId);
     }
 
+    @GetMapping("queryAll")
+    public Object queryAll(@RequestHeader("sessionId") String sessionId) {
+        Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
+        String accessKeyId = map.get("accessKeyId");
+        String accessKey = map.get("accessKey");
+        return cloudManage.queryCloud(accessKeyId, accessKey);
+    }
+
+    @GetMapping("queryStatus")
+    public Object queryStatus(@RequestHeader("sessionId") String sessionId) {
+        Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
+        String accessKeyId = map.get("accessKeyId");
+        String accessKey = map.get("accessKey");
+        return cloudManage.queryCloudStatus(accessKeyId, accessKey);
+    }
+
     @GetMapping("start")
     public Object start(@RequestParam("region") String region,
                         @RequestParam("id") String id,

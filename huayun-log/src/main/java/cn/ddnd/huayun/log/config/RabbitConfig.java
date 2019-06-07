@@ -5,12 +5,6 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @program: huayun
- * @description: 序列化机制
- * @author: Xue 8
- * @create: 2019-05-21 15:30
- **/
 @Configuration
 public class RabbitConfig {
 

@@ -1,11 +1,5 @@
 package cn.ddnd.huayun.es.pojo;
 
-/**
- * @program: huayun
- * @description:
- * @author: Xue 8
- * @create: 2019-05-23 20:36
- **/
 public class Cloud {
     String datetime;
     String unit;

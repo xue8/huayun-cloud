@@ -46,8 +46,8 @@ public class CloudSnapshotController {
 
     @GetMapping("query")
     public Object query(@RequestParam("region") String region,
-                        @RequestParam("id") String id,
-                        @RequestParam("snapshotId") String snapshotId,
+                        @Nullable @RequestParam("id") String id,
+                        @Nullable @RequestParam("snapshotId") String snapshotId,
                         @RequestHeader("sessionId") String sessionId) {
         
         Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);

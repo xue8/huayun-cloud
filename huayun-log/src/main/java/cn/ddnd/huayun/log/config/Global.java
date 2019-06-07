@@ -5,13 +5,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-/**
- * @program: huayun
- * @description: 配置信息
- * @author: Xue 8
- * @create: 2019-05-21 16:58
- **/
-
 @Component
 public class Global {
 

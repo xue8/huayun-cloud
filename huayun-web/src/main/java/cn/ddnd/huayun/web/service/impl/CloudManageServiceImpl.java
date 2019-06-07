@@ -1,5 +1,6 @@
 package cn.ddnd.huayun.web.service.impl;
 
+import cn.ddnd.huayun.web.config.Global;
 import cn.ddnd.huayun.web.pojo.Cloud;
 import cn.ddnd.huayun.web.request.Execute.*;
 import cn.ddnd.huayun.web.service.CloudManageService;
@@ -74,6 +75,90 @@ public class CloudManageServiceImpl implements CloudManageService {
         Map map2 = new HashMap();
         map2.put("data", result);
         return map2;
+    }
+
+    /**
+     * 查询主机总数，以及正常、过期、欠费的数量
+     * @param accessKeyId
+     * @param accessKey
+     * @return
+     */
+    @Override
+    public Object queryCloud(String accessKeyId, String accessKey) {
+        List<String> list = Global.region;
+        Map result = new HashMap();
+        result.put("normal", 0);
+        result.put("overtimer", 0);
+        result.put("arrearage", 0);
+        result.put("total", 0);
+        for (String str : list) {
+            Object o = this.queryCloud(accessKeyId, accessKey, str, null);
+            if (!o.equals("{\"data\": []}")) {
+                Map map = JSON.parseObject(JSON.toJSONString(o), Map.class);
+                List list1 = JSON.parseObject(JSON.toJSONString(map.get("data")), List.class);
+                for (Object o1 : list1) {
+                    Map map1 = JSON.parseObject(JSON.toJSONString(o1), Map.class);
+                    if (map1.get("productStatus").equals("NORMAL"))
+                        result.put("normal", (Integer) result.get("normal") + 1);
+                    if (map1.get("productStatus").equals("OVERTIMER"))
+                        result.put("overtimer", (Integer) result.get("overtimer") + 1);
+                    if (map1.get("productStatus").equals("ARREARAGE"))
+                        result.put("arrearage", (Integer) result.get("arrearage") + 1);
+                    result.put("total", (Integer) result.get("total") + 1);
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 查询机房所有主机的状态
+     * @param accessKeyId
+     * @param accessKey
+     * @return
+     */
+    @Override
+    public Object queryCloudStatus(String accessKeyId, String accessKey) {
+        List<String> list = Global.region;
+        List result = new ArrayList();
+        for (String str : list) {
+            Object o = this.queryCloud(accessKeyId, accessKey, str, null);
+            Map map1 = new HashMap();
+            if (!o.equals("{\"data\": []}")) {
+                Map map = JSON.parseObject(JSON.toJSONString(o), Map.class);
+                List list1 = JSON.parseObject(JSON.toJSONString(map.get("data")), List.class);
+                map1.put("region", str);
+                map1.put("totalCount", list1.size());
+                map1.put("start", 0);
+                map1.put("stop", 0);
+                map1.put("error", 0);
+                map1.put("other", 0);
+                map1.put("normal", 0);
+                map1.put("overtimer", 0);
+                map1.put("arrearage", 0);
+                for (Object o1 : list1) {
+                    Map map2 = JSON.parseObject(JSON.toJSONString(o1), Map.class);
+                    if (map2.get("status").equals("START"))
+                        map1.put("start", (Integer) map1.get("start") + 1);
+                    if (map2.get("status").equals("STOP"))
+                        map1.put("stop", (Integer) map1.get("stop") + 1);
+                    if (map2.get("status").equals("ERROR"))
+                        map1.put("error", (Integer) map1.get("error") + 1);
+                    if (!map2.get("status").equals("START") && !map2.get("status").equals("STOP") && !map2.get("status").equals("ERROR"))
+                        map1.put("other", (Integer) map1.get("other") + 1);
+                    if (map2.get("productStatus").equals("NORMAL"))
+                        map1.put("normal", (Integer) map1.get("normal") + 1);
+                    if (map2.get("productStatus").equals("OVERTIMER"))
+                        map1.put("overtimer", (Integer) map1.get("overtimer") + 1);
+                    if (map2.get("productStatus").equals("ARREARAGE"))
+                        map1.put("arrearage", (Integer) map1.get("arrearage") + 1);
+                    map1.put("totalCount", (Integer) map1.get("totalCount") + 1);
+                }
+            }
+            if (map1.size() != 0)
+                result.add(map1);
+        }
+        return result;
     }
 
     /**
@@ -327,4 +412,5 @@ public class CloudManageServiceImpl implements CloudManageService {
         Object object = start.execute(map);
         return object;
     }
+
 }
