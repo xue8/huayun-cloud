@@ -48,7 +48,7 @@ public class MonitorServiceImpl implements MonitorService {
             always(info, cloudInfoList);
         if (info.getType() == 3)
             average(info, cloudInfoList);
-
+        System.out.println("----------huayun.monitor.info: " + info.getType());
     }
 
     /**
@@ -66,9 +66,9 @@ public class MonitorServiceImpl implements MonitorService {
                                 "，资源：" + info.getIndex() + "，使用率超过" + info.getThreshold() + "%" +
                                 "，请及时处理！",
                         info.getEmail());
-            }
             record(info);
             break;
+            }
         }
     }
 
@@ -143,6 +143,7 @@ public class MonitorServiceImpl implements MonitorService {
                             "，请及时处理！",
                     info.getEmail());
             stringRedisTemplate.delete(k);
+            stringRedisTemplate.delete(k  + "_cycle");
             String str = "【华云比赛】尊敬的用户，您的云服务器Id：" + info.getId() + ", 资源" + info.getIndex() + "，使用率超过" + info.getThreshold() + "，请及时处理！";
             aliyunSms.send(info.getPhone(), str);
             record(info);
@@ -162,4 +163,5 @@ public class MonitorServiceImpl implements MonitorService {
         record.setDatetime(format.format(new Date()));
         recordMapper.insertMonitorRecord(record);
     }
+
 }

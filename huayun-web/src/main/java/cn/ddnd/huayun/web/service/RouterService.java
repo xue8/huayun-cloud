@@ -1,7 +1,5 @@
 package cn.ddnd.huayun.web.service;
 
-import cn.ddnd.huayun.web.pojo.Router;
-
 import java.util.List;
 
 public interface RouterService {
@@ -15,6 +13,6 @@ public interface RouterService {
     Object deleteRouterInterface(String accessKeyId, String accessKey, String region, String netCardId);
     Object modifyRouter(String accessKeyId, String accessKey, String region, String routerId, String name, String description);
     List queryRouterInterface(String accessKeyId, String accessKey, String region, String routerId, String networkId, String netCardId);
-    List routerInMonitor(String accessKeyId, String accessKey, String region, String routerId, String startTime, String endTime);
-    List routerOutMonitor(String accessKeyId, String accessKey, String region, String routerId, String startTime, String endTime);
+    List routerInMonitor(String routerId, String startTime, String endTime);
+    List routerOutMonitor(String routerId, String startTime, String endTime);
 }

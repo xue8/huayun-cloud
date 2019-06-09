@@ -1,7 +1,9 @@
 package cn.ddnd.huayun.log.pojo;
 
 
-public class Cloud {
+import java.io.Serializable;
+
+public class Cloud implements Serializable {
     String taskId;
     String unit;
     int interval;

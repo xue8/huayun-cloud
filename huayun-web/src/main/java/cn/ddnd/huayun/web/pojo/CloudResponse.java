@@ -14,6 +14,33 @@ public class CloudResponse {
     Object routerSet;
     Object routerInterfaceSet;
     Object data;
+    Object loadBalancerSet;
+    Object lBInterface;
+    Object lBPolicySet;
+
+    public Object getlBPolicySet() {
+        return lBPolicySet;
+    }
+
+    public void setlBPolicySet(Object lBPolicySet) {
+        this.lBPolicySet = lBPolicySet;
+    }
+
+    public Object getlBInterface() {
+        return lBInterface;
+    }
+
+    public void setlBInterface(Object lBInterface) {
+        this.lBInterface = lBInterface;
+    }
+
+    public Object getLoadBalancerSet() {
+        return loadBalancerSet;
+    }
+
+    public void setLoadBalancerSet(Object loadBalancerSet) {
+        this.loadBalancerSet = loadBalancerSet;
+    }
 
     public Object getData() {
         return data;

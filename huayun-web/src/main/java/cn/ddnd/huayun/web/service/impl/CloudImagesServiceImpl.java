@@ -77,6 +77,7 @@ public class CloudImagesServiceImpl implements CloudImagesService {
         map.put("Action", "DescribeImages");
         map.put("AccessKeyId", accessKeyId);
         map.put("AccessKey", accessKey);
+        map.put("Shared", "false");
         if (imagesId != null && !imagesId.equals(""))
             map.put("Id.0 ", imagesId);
         Object object = start.execute(map);

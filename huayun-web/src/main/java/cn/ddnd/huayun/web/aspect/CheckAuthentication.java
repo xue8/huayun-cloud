@@ -28,8 +28,8 @@ public class CheckAuthentication {
      * 对除了登录的 controller 进行身份验证
      */
     @Pointcut(value = "execution(public * cn.ddnd.huayun.web.controller.*.*(..)) " +
-            "&& !execution(public * cn.ddnd.huayun.web.controller.LoginController.*(..))" +
-            "&& !execution(public * cn.ddnd.huayun.web.controller.MonitorController.*(..))")
+            "&& !execution(public * cn.ddnd.huayun.web.controller.LoginController.login(..))" +
+            "&& !execution(public * cn.ddnd.huayun.web.controller.LoginController.register(..))")
     public void controller() {
     }
 

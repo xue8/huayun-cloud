@@ -47,7 +47,7 @@ public class MonitorInfoServiceImpl implements MonitorInfoService {
         return monitorInfoMapper.findMonitorInfoByIdAndTime(id, time);
     }
 
-    @Cacheable("monitor_info")
+//    @Cacheable("monitor_info")
     @Override
     public List<MonitorInfo> findMonitorInfoByTime(Integer time) {
         return monitorInfoMapper.findMonitorInfoByTime(time);

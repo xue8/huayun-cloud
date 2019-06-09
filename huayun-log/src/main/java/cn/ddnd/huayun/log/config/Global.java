@@ -5,6 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class Global {
 
@@ -22,6 +24,9 @@ public class Global {
     public static Integer cloudIopsWrite;
     public static Integer cloudFipIn;
     public static Integer cloudFipOut;
+    public static List<String> cloudIdList;
+    public static List<String> routerIdList;
+    public static List<String> lbIdList;
 
     @Value("${global.rabbitmq.exchange}")
     private void setExchange(String exchange) {
@@ -91,5 +96,20 @@ public class Global {
     @Value("${global.huayun.request-api-url}")
     private void setRequesApiUrl(String url) {
         Global.requesApiUrl = url;
+    }
+
+    @Value("${global.huayun.cloud-id}")
+    private void setCloudIdList(List cloudIdList) {
+        Global.cloudIdList = cloudIdList;
+    }
+
+    @Value("${global.huayun.router-id}")
+    private void setRouterIdList(List routerIdList) {
+        Global.routerIdList = routerIdList;
+    }
+
+    @Value("${global.huayun.lb-id}")
+    private void setIbIdList(List lbIdList) {
+        Global.lbIdList = lbIdList;
     }
 }

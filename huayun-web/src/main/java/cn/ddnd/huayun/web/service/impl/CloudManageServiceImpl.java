@@ -50,12 +50,15 @@ public class CloudManageServiceImpl implements CloudManageService {
             cloud.setId((String) map2.get("Id"));
             cloud.setName((String) map2.get("Name"));
             List list1 = (List) map2.get("Internet");
+            if (list1 == null)
+                return "{\"data\": []}";
             for (Object object2 : list1) {
                 Map map3 = (Map) object2;
                 cloud.setPublicIp(cloud.getPublicIp() + ";" + map3.get("IpAddress"));
                 cloud.setBandWidth((Integer) map3.get("Bandwidth"));
             }
-            cloud.setPublicIp(cloud.getPublicIp().replaceAll("null;", ""));
+            if (cloud.getPublicIp() != null)
+                cloud.setPublicIp(cloud.getPublicIp().replaceAll("null;", ""));
             List list2 = (List) map2.get("InterfaceSet");
             for (Object object2 : list2) {
                 Map map3 = (Map) object2;
@@ -128,7 +131,7 @@ public class CloudManageServiceImpl implements CloudManageService {
                 Map map = JSON.parseObject(JSON.toJSONString(o), Map.class);
                 List list1 = JSON.parseObject(JSON.toJSONString(map.get("data")), List.class);
                 map1.put("region", str);
-                map1.put("totalCount", list1.size());
+                map1.put("totalCount", 0);
                 map1.put("start", 0);
                 map1.put("stop", 0);
                 map1.put("error", 0);

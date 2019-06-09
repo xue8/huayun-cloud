@@ -20,6 +20,9 @@ global:
     access-key-id: 36c34ff3094b4dec9786dcc35d1f0d41
     access-key-secret: b87e24ad3b00420fadec14a9260ca94e
     request-api-url: https://api.chinac.com/
+    cloud-id: i-zz6rj39kty724
+    router-id: r-sm7yj59iy6117, r-747yj59j9a2l
+    lb-id:
 
   cloud:
     cpu: 100
@@ -31,17 +34,3 @@ global:
     iops-write: 106
     fip-in: 107
     fip-out: 108
-
-# elasticsearch watcher 监控报警插件 163邮箱设置
-watcher.actions.email.service.account:
-  work:
-    profile: standard
-    email_defaults:
-      from: 'dodoname@163.com'
-    smtp:
-      auth: true
-      starttls.enable: true
-      host: smtp.163.com
-      port: 25
-      user: dodoname@163.com
-      password: 123456AA

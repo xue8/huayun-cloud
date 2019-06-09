@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/cloud/snapshot")
+@RequestMapping("/cloud/snapshot/")
 public class CloudSnapshotController {
 
     @Autowired

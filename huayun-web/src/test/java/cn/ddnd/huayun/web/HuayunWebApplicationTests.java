@@ -13,6 +13,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -64,6 +66,11 @@ public class HuayunWebApplicationTests {
     @Autowired
     RouterService routerService;
 
+//    @RabbitListener(queues = "aa")
+//    public void test() {
+//
+//    }
+
     @Test
     public void contextLoads() {
 //        String str = "【华云比赛】尊敬的用户，您的云服务器Id：${cloudId}, 资源${type}，使用率超过${used}，请及时处理！";
@@ -73,10 +80,10 @@ public class HuayunWebApplicationTests {
                 "b87e24ad3b00420fadec14a9260ca94e",
                 "cn-chengdu", "");
 
-        List list1 = routerService.routerInMonitor("36c34ff3094b4dec9786dcc35d1f0d41",
-                "b87e24ad3b00420fadec14a9260ca94e",
-                "cn-chengdu", "r-sk7yj56lsa186", "2019-06-06 21:28:10", "2019-06-06 22:28:10");
-        System.out.println();
+//        List list1 = routerService.routerInMonitor("36c34ff3094b4dec9786dcc35d1f0d41",
+//                "b87e24ad3b00420fadec14a9260ca94e",
+//                "cn-chengdu", "r-sk7yj56lsa186", "2019-06-06 21:28:10", "2019-06-06 22:28:10");
+//        System.out.println();
 //        List<MonitorInfo> infoByTime = monitorInfoService.findMonitorInfoByTime(60);
 //        snapshotService.queryCloudSnapshot("36c34ff3094b4dec9786dcc35d1f0d41",
 //                "b87e24ad3b00420fadec14a9260ca94e",

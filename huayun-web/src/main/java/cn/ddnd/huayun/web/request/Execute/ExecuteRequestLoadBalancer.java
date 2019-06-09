@@ -2,10 +2,10 @@ package cn.ddnd.huayun.web.request.Execute;
 
 import java.util.Map;
 
-public class ExecuteRequestRouter extends ExecuteRequest{
+public class ExecuteRequestLoadBalancer extends ExecuteRequest{
 
     /**
-     * 路由器相关操作
+     * 负载均衡相关操作
      * @param parameter
      * @return
      */

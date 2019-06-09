@@ -15,7 +15,7 @@ spring:
     host: 127.0.0.1
   mail:
     host: smtp.163.com
-    username: dodoname@163.com
+    username: 18589831291@163.com
     password: 123123qwe #gzhogknhbmfebgbi #123123qwe
     protocol: smtp
     properties: {"mail.smtp.auth":"true", "mail.smtp.ssl.enable":"true", "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory"}
@@ -23,7 +23,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql://127.0.0.1:3306/huayun?serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/huayun?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     type: com.alibaba.druid.pool.DruidDataSource
     # Druid 配置
     initial-size: 8 #初始化连接大小
@@ -56,7 +56,7 @@ global:
     routing-key:
   monitor:
     title: 云主机告急提示 【华云】
-    email: dodoname@163.com
+    email: 18589831291@163.com
   msm:
     app-code: 0a3e3bbf4b5f4f7599063eabb424ab76
 

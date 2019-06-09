@@ -42,12 +42,12 @@ public abstract class ExecuteRequest {
         map.put("Date", date);
         map.put("AccessKeyId", accessKeyId);
         map.put("Version", "1.0");
-        this.okHttpClient = (OkHttpClient) ApplicationUtil.getBean(OkHttpClient.class);
     }
 
     public abstract Object execute(Map parameter);
 
     public Object doExecute() {
+        auto();
         Request request = okHttpRequest.getRequestUrl(map);
         try {
             Response response = okHttpClient.newCall(request).execute();
@@ -58,4 +58,10 @@ public abstract class ExecuteRequest {
         }
         return null;
     }
+
+    private void auto() {
+        if (okHttpClient == null)
+            this.okHttpClient = (OkHttpClient) ApplicationUtil.getBean(OkHttpClient.class);
+    }
+
 }

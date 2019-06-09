@@ -20,11 +20,15 @@ public class CloudDiskMessageHandleImpl implements MessageHandle{
      * @return
      */
     @Override
-    public Map handle(String msg, String typeName) {
+    public Map handle(String msg, String typeName, String id) {
         JSONObject jsonObject = JSONObject.parseObject(msg);
         Cloud cloud = JSON.toJavaObject(jsonObject, Cloud.class);
 
+        if (cloud.getData() == null)
+            return null;
         List list = (List) cloud.getData();
+        if (list.size() == 0 || list == null)
+            return null;
         Map map = (Map) list.get(0);
         String tag = (String) map.get("Tag");
         List list1 = (List) map.get("Data");
@@ -45,7 +49,7 @@ public class CloudDiskMessageHandleImpl implements MessageHandle{
         map1.put("datetime", datetime);
         map1.put("used",  used);
         map1.put("type", typeName);
-        map1.put("id", "i-zz6rj39kty724");
+        map1.put("id", id);
         map1.put("tag", tag);
         map1.put("unit", cloud.getUnit());
         map1.put("interval", cloud.getInterval());

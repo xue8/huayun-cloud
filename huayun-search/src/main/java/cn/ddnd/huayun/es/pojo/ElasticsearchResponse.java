@@ -1,6 +1,8 @@
 package cn.ddnd.huayun.es.pojo;
 
-public class ElasticsearchResponse {
+import java.io.Serializable;
+
+public class ElasticsearchResponse  implements Serializable {
     Object took;
     Object timedOut;
     Object shards;

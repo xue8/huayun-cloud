@@ -1,7 +1,10 @@
 package cn.ddnd.huayun.web.service.impl;
 
+import cn.ddnd.huayun.es.service.SearchService;
+import cn.ddnd.huayun.web.pojo.CloudInfo;
 import cn.ddnd.huayun.web.request.Execute.ExecuteRequestRouter;
 import cn.ddnd.huayun.web.service.RouterService;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,8 @@ import java.util.Map;
 
 @Service
 public class RouterServiceImpl implements RouterService {
+    @Reference
+    SearchService searchService;
 
     @Override
     public List queryRouter(String accessKeyId, String accessKey, String region, String routerId) {
@@ -167,38 +172,18 @@ public class RouterServiceImpl implements RouterService {
     }
 
     @Override
-    public List routerInMonitor(String accessKeyId, String accessKey, String region, String routerId, String startTime, String endTime) {
-        ExecuteRequestRouter router = new ExecuteRequestRouter();
-        Map map = new HashMap();
-        map.put("Region", region);
-        map.put("Action", "RouterInMonitor");
-        map.put("AccessKeyId", accessKeyId);
-        map.put("AccessKey", accessKey);
-        map.put("Id", routerId);
-        map.put("StartTime", startTime);
-        map.put("EndTime", endTime);
-
-        Object object = router.execute(map);
-        Map map1 = JSON.parseObject(JSON.toJSONString(object), Map.class);
-        List list1 = JSON.parseObject(JSON.toJSONString(map1.get("data")), List.class);
-        return list1;
+    public List routerInMonitor(String routerId, String startTime, String endTime) {
+        List<CloudInfo> list = searchService.search("router_router_in", "_doc", "xue8", routerId, startTime, endTime, true);
+        if (list.size() != 0)
+            return list;
+        return null;
     }
 
     @Override
-    public List routerOutMonitor(String accessKeyId, String accessKey, String region, String routerId, String startTime, String endTime) {
-        ExecuteRequestRouter router = new ExecuteRequestRouter();
-        Map map = new HashMap();
-        map.put("Region", region);
-        map.put("Action", "RouterOutMonitor");
-        map.put("AccessKeyId", accessKeyId);
-        map.put("AccessKey", accessKey);
-        map.put("Id", routerId);
-        map.put("StartTime", startTime);
-        map.put("EndTime", endTime);
-
-        Object object = router.execute(map);
-        Map map1 = JSON.parseObject(JSON.toJSONString(object), Map.class);
-        List list1 = JSON.parseObject(JSON.toJSONString(map1.get("data")), List.class);
-        return list1;
+    public List routerOutMonitor(String routerId, String startTime, String endTime) {
+        List<CloudInfo> list = searchService.search("router_router_out", "_doc", "xue8", routerId, startTime, endTime, true);
+        if (list.size() != 0)
+            return list;
+        return null;
     }
 }

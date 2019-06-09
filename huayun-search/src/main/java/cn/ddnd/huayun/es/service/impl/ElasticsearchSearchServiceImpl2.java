@@ -11,9 +11,9 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
 
     ElasticsearchService elasticsearchDao;
 
-
-    public ElasticsearchSearchServiceImpl2() {
-        this.elasticsearchDao = (ElasticsearchServiceImpl) ApplicationUtil.getBean(ElasticsearchServiceImpl.class);
+    private void auto() {
+        if (elasticsearchDao == null)
+            this.elasticsearchDao = (ElasticsearchServiceImpl) ApplicationUtil.getBean(ElasticsearchServiceImpl.class);
     }
 
     /**
@@ -30,6 +30,7 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
     @Override
     public SearchResult searchByDatetimeRange(String index, String type, String username, String id,
                                               String startDatetime, String endDatetime,boolean sort) {
+        auto();
         String query = null;
         if (sort) {
             query = "{\n" +
@@ -130,6 +131,7 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
     @Override
     public SearchResult searchByUsedRange(String index, String type, String username, String id,Double start, Double end,
                                           boolean sort) {
+        auto();
         String query = null;
         if (sort) {
             query = "{\n" +
@@ -230,6 +232,7 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
     @Override
     public SearchResult searchByDatetimeAndUsedRange(String index, String type, String username, String id, String startDatetime,
                                                      String endDatetime, Double start, Double end, boolean sort) {
+        auto();
         String query = null;
         if (sort) {
             query = "{\n" +
@@ -362,6 +365,7 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
     @Override
     public SearchResult searchByDefault(String index, String type, String username, String id, boolean sort) {
 
+        auto();
         String query = null;
         if (sort) {
             query = "{\n" +

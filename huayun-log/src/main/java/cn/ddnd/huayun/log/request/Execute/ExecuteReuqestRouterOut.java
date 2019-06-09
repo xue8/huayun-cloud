@@ -1,9 +1,8 @@
 package cn.ddnd.huayun.log.request.Execute;
 
 import cn.ddnd.huayun.log.config.Global;
-import cn.ddnd.huayun.log.message.CloudDiskMessageHandleImpl;
-import cn.ddnd.huayun.log.message.CloudMessageHandleImpl;
 import cn.ddnd.huayun.log.message.MessageHandle;
+import cn.ddnd.huayun.log.message.RouterHandleImpl;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
@@ -15,23 +14,25 @@ import java.util.Map;
 
 /**
  * @program: huayun
- * @description: 磁盘IO写日志
+ * @description: 路由器流出速率
  * @author: Xue 8
  * @create: 2019-05-23 17:30
  **/
-public class ExecuteReuqestIoWrite extends ExecuteRequest{
+public class ExecuteReuqestRouterOut extends ExecuteRequest{
     @Override
     public void execute() {
-//        map.put("Action", "InstanceIoWriteMonitor");
-//        map.put("Id", "i-zz6rj39kty724");
+//        map.put("Action", "RouterOutMonitor");
+//        map.put("Id", "r-7y7yj57b5a8h");
+//        map.put("Region", "cn-chengdu");
 //        map.put("StartTime", startDateTime);
 //        map.put("EndTime", endDateTime);
 
-        if (Global.cloudIdList == null || Global.cloudIdList.size() == 0)
+        if (Global.routerIdList == null || Global.routerIdList.size() == 0)
             return;
-        for (String str : Global.cloudIdList) {
-            map.put("Action", "InstanceIoWriteMonitor");
+        for (String str : Global.routerIdList) {
+            map.put("Action", "RouterOutMonitor");
             map.put("Id", str);
+            map.put("Region", "cn-chengdu");
             map.put("StartTime", startDateTime);
             map.put("EndTime", endDateTime);
             Map map1 = new HashMap(map);
@@ -39,8 +40,8 @@ public class ExecuteReuqestIoWrite extends ExecuteRequest{
             Request request = okHttpRequest.getRequestUrl(map1);
             try {
                 Response response = okHttpClient.newCall(request).execute();
-                MessageHandle handle = new CloudDiskMessageHandleImpl();
-                Map map = handle.handle(response.body().string(), "io_write", String.valueOf(map1.get("Id")));
+                MessageHandle handle = new RouterHandleImpl();
+                Map map = handle.handle(response.body().string(), "router_out", String.valueOf(map1.get("Id")));
                 if (map == null || map.size() == 0)
                     return;
                 rabbitmqService.publish(map);

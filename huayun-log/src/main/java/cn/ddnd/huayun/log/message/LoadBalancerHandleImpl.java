@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CloudMessageHandleImpl implements MessageHandle {
+public class LoadBalancerHandleImpl implements MessageHandle{
 
     /**
      * 解析数据
@@ -24,17 +24,18 @@ public class CloudMessageHandleImpl implements MessageHandle {
         JSONObject jsonObject = JSONObject.parseObject(msg);
         Cloud cloud = JSON.toJavaObject(jsonObject, Cloud.class);
 
-        if (cloud.getData() == null)
+        if (cloud.getData() == null || ((JSONObject) cloud.getData()).size() == 0)
             return null;
-        List<List<Object>> lists = (List<List<Object>>) cloud.getData();
-        if (lists.size() == 0 || lists == null)
+        List list = (List) cloud.getData();
+        if (list == null || list.size() == 0)
             return null;
-        String datetime = (String) lists.get(0).get(0);
-        Double used = Double.valueOf(lists.get(0).get(1).toString());
+        List list1 = (List) list.get(0);
+        String datetime = (String) list1.get(0);
+        Double used = Double.valueOf(String.valueOf(list1.get(1)));
 
-        Map map = new HashMap();
-        map.put("index", "cloud");
-        map.put("username", "xue8");
+        Map map1 = new HashMap();
+        map1.put("index", "lb");
+        map1.put("username", "xue8");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         try {
             Date date = format.parse(datetime);
@@ -43,14 +44,12 @@ public class CloudMessageHandleImpl implements MessageHandle {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        map.put("datetime", datetime);
-        map.put("used",  used);
-        map.put("type", typeName);
-        map.put("id", id);
-        map.put("unit", cloud.getUnit());
-        map.put("interval", cloud.getInterval());
-        return map;
+        map1.put("datetime", datetime);
+        map1.put("used",  used);
+        map1.put("type", typeName);
+        map1.put("id", id);
+        map1.put("unit", cloud.getUnit());
+        map1.put("interval", cloud.getInterval());
+        return map1;
     }
-
-
 }

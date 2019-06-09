@@ -38,6 +38,18 @@ public class LogScheduled {
 
         ExecuteRequest fipOut = new ExecuteRequestFipOut();
         fipOut.execute();
+
+        ExecuteRequest routerIn = new ExecuteReuqestRouterIn();
+        routerIn.execute();
+
+        ExecuteRequest routerOut = new ExecuteReuqestRouterOut();
+        routerOut.execute();
+
+        ExecuteRequest balancerIn = new ExecuteReuqestloadBalancerIn();
+        balancerIn.execute();
+
+        ExecuteRequest balancerOut = new ExecuteReuqestloadBalancerOut();
+        balancerOut.execute();
     }
 
 

@@ -1,6 +1,8 @@
 package cn.ddnd.huayun.es.repository.impl;
 
 import cn.ddnd.huayun.es.mapper.CloudMapper;
+import cn.ddnd.huayun.es.mapper.LoadBalancerMapper;
+import cn.ddnd.huayun.es.mapper.RouterMapper;
 import cn.ddnd.huayun.es.pojo.Cloud;
 import cn.ddnd.huayun.es.repository.RabbitmqService;
 import cn.ddnd.huayun.es.util.Util;
@@ -22,6 +24,10 @@ public class RabbitmqMysqlServiceImpl implements RabbitmqService {
 
     @Autowired
     CloudMapper cloudMapper;
+    @Autowired
+    RouterMapper routerMapper;
+    @Autowired
+    LoadBalancerMapper loadBalancerMapper;
 
     /**
      * 监听 rabbitMQ，获取消息
@@ -72,7 +78,16 @@ public class RabbitmqMysqlServiceImpl implements RabbitmqService {
         } else if (type.equals("disk_used")) {
             cloud.setTag((String) map.get("tag"));
             cloudMapper.insertCloudDiskUsed(cloud);
+        } else if (type.equals("router_in")) {
+            routerMapper.insertRouterIn(cloud);
+        } else if (type.equals("router_out")) {
+            routerMapper.insertRouterOut(cloud);
+        } else if (type.equals("lb_in")) {
+            loadBalancerMapper.insertLoadBalancerIn(cloud);
+        } else if (type.equals("lb_out")) {
+            loadBalancerMapper.insertBalancerOut(cloud);
         }
+
 
     }
 }

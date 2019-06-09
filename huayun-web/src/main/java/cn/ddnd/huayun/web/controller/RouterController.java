@@ -134,28 +134,20 @@ public class RouterController {
     }
 
     @GetMapping("routerInMonitor")
-    public Object routerInMonitor(@RequestParam("region") String region,
-                                       @RequestParam("routerId") String routerId,
-                                       @RequestParam("startTime") String startTime,
-                                       @RequestParam("endTime") String endTime,
-                                       @RequestHeader("sessionId") String sessionId) {
+    public Object routerInMonitor(@RequestParam("routerId") String routerId,
+                                   @RequestParam("startDatetime") String startTime,
+                                   @RequestParam("endDatetime") String endTime,
+                                   @RequestHeader("sessionId") String sessionId) {
 
-        Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
-        String accessKeyId = map.get("accessKeyId");
-        String accessKey = map.get("accessKey");
-        return routerService.routerInMonitor(accessKeyId, accessKey, region, routerId, startTime, endTime);
+        return routerService.routerInMonitor(routerId, startTime, endTime);
     }
 
     @GetMapping("routerOutMonitor")
-    public Object routerOutMonitor(@RequestParam("region") String region,
-                                  @RequestParam("routerId") String routerId,
-                                  @RequestParam("startTime") String startTime,
-                                  @RequestParam("endTime") String endTime,
+    public Object routerOutMonitor(@RequestParam("routerId") String routerId,
+                                  @RequestParam("startDatetime") String startTime,
+                                  @RequestParam("endDatetime") String endTime,
                                   @RequestHeader("sessionId") String sessionId) {
 
-        Map<String, String> map = (Map) stringRedisTemplate.opsForHash().entries("user:" + sessionId);
-        String accessKeyId = map.get("accessKeyId");
-        String accessKey = map.get("accessKey");
-        return routerService.routerOutMonitor(accessKeyId, accessKey, region, routerId, startTime, endTime);
+        return routerService.routerOutMonitor(routerId, startTime, endTime);
     }
 }

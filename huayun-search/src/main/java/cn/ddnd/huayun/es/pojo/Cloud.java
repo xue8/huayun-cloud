@@ -1,6 +1,8 @@
 package cn.ddnd.huayun.es.pojo;
 
-public class Cloud {
+import java.io.Serializable;
+
+public class Cloud  implements Serializable{
     String datetime;
     String unit;
     Double used;
