@@ -16,12 +16,12 @@ public class EmailSender {
       * 邮件发送
      */
     public void send(String subject, String message, String to) {
-//        SimpleMailMessage mailMessage = new SimpleMailMessage();
-//        mailMessage.setSubject(subject);
-//        mailMessage.setText(message);
-//        mailMessage.setTo(to);
-//        mailMessage.setFrom(Global.monitorEmail);
-//        sender.send(mailMessage);
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setSubject(subject);
+        mailMessage.setText(message);
+        mailMessage.setTo(to);
+        mailMessage.setFrom(Global.monitorEmail);
+        sender.send(mailMessage);
     }
 
 }

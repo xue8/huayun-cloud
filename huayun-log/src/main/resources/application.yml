@@ -1,15 +1,13 @@
 spring:
 #  rabbitmq 配置信息
   rabbitmq:
-    host: 127.0.0.1
+    host: 47.92.98.120
     port: 5672
     username: guest
     password: guest
     virtual-host: /
-  elasticsearch:
-    jest:
-#      password: 760oA4j7BDLDDU2dUcer
-#      username: elastic
+#  elasticsearch:
+#    jest:
 
 global:
   rabbitmq:
@@ -20,9 +18,9 @@ global:
     access-key-id: 36c34ff3094b4dec9786dcc35d1f0d41
     access-key-secret: b87e24ad3b00420fadec14a9260ca94e
     request-api-url: https://api.chinac.com/
-    cloud-id: i-zz6rj39kty724
-    router-id: r-sm7yj59iy6117, r-747yj59j9a2l
-    lb-id:
+    cloud-id: i-zz6rj39kty724;cn-huaian, i-si7yj5sf4m796;cn-chengdu
+    router-id: r-xy7yj5d03e570;cn-chengdu, r-eu7yj5d082833;cn-chengdu, r-8v7yj5d0d110y;cn-chengdu, r-ea5nj5dd9y67n;cn-anxi
+    lb-id: lb-hf7yj5d02194c;cn-chengdu
 
   cloud:
     cpu: 100

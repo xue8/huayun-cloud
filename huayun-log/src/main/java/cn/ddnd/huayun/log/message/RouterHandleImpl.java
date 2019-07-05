@@ -26,7 +26,12 @@ public class RouterHandleImpl implements MessageHandle{
 
         if (cloud.getData() == null)
             return null;
-        List list = (List) cloud.getData();
+        List list = null;
+        try {
+            list = (List) cloud.getData();
+        } catch (ClassCastException e) {
+            return null;
+        }
         if (list == null || list.size() == 0)
             return null;
         List list1 = (List) list.get(0);

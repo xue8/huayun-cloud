@@ -28,14 +28,14 @@ public class ElasticsearchSearchServiceImpl implements ElasticsearchSearchServic
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + searchDao.getId() +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + searchDao.getUsername() +
                     "\"\n" +
@@ -69,14 +69,14 @@ public class ElasticsearchSearchServiceImpl implements ElasticsearchSearchServic
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + searchDao.getId() +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + searchDao.getUsername() +
                     "\"\n" +
@@ -111,14 +111,14 @@ public class ElasticsearchSearchServiceImpl implements ElasticsearchSearchServic
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + searchDao.getId() +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + searchDao.getUsername() +
                     "\"\n" +
@@ -152,14 +152,14 @@ public class ElasticsearchSearchServiceImpl implements ElasticsearchSearchServic
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + searchDao.getId() +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + searchDao.getUsername() +
                     "\"\n" +
@@ -194,14 +194,14 @@ public class ElasticsearchSearchServiceImpl implements ElasticsearchSearchServic
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + searchDao.getId() +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + searchDao.getUsername() +
                     "\"\n" +
@@ -248,14 +248,14 @@ public class ElasticsearchSearchServiceImpl implements ElasticsearchSearchServic
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + searchDao.getId() +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + searchDao.getUsername() +
                     "\"\n" +

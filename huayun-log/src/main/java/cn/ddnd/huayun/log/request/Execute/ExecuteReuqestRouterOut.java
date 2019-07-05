@@ -30,9 +30,10 @@ public class ExecuteReuqestRouterOut extends ExecuteRequest{
         if (Global.routerIdList == null || Global.routerIdList.size() == 0)
             return;
         for (String str : Global.routerIdList) {
+            String[] strArr = str.split(";");
+            map.put("Region", strArr[1]);
             map.put("Action", "RouterOutMonitor");
-            map.put("Id", str);
-            map.put("Region", "cn-chengdu");
+            map.put("Id", strArr[0]);
             map.put("StartTime", startDateTime);
             map.put("EndTime", endDateTime);
             Map map1 = new HashMap(map);

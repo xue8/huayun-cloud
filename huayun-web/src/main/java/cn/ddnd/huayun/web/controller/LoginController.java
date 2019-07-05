@@ -50,11 +50,14 @@ public class LoginController {
             return "{\"error\":\"用户不存在\"}";
         if (!members1.getPassword().equals(password))
             return "{\"error\":\"密码不正确\"}";
-        Map map = new HashMap<>();
-        map.put("accessKeyId", "b413a44216fb4b7ca709368b50937f54");
-        map.put("accessKey", "003193565fef41459f8719bad5951082");
-        stringRedisTemplate.opsForHash().putAll("user:" + session.getId(), map);
-        stringRedisTemplate.expire("user:" + session.getId(), 30, TimeUnit.MINUTES);
+
+        if (members1.getKeyId() != null && !members1.getKeyId().equals("")) {
+            Map map = new HashMap<>();
+            map.put("accessKeyId", members1.getKeyId());
+            map.put("accessKey", members1.getKeySecret());
+            stringRedisTemplate.opsForHash().putAll("user:" + session.getId(), map);
+            stringRedisTemplate.expire("user:" + session.getId(), 10, TimeUnit.HOURS);
+        }
 
         String ip = request.getRemoteAddr();
         Request request1 = new Request.Builder()
@@ -110,7 +113,7 @@ public class LoginController {
         map.put("accessKeyId", keyId);
         map.put("accessKey", keySecret);
         stringRedisTemplate.opsForHash().putAll("user:" + session.getId(), map);
-        stringRedisTemplate.expire("user:" + session.getId(), 30, TimeUnit.MINUTES);
+        stringRedisTemplate.expire("user:" + session.getId(), 10, TimeUnit.HOURS);
         Members members = new Members();
         members.setUsername(username);
         members.setPassword(password);

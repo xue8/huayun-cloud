@@ -30,8 +30,10 @@ public class ExecuteReuqestIoWrite extends ExecuteRequest{
         if (Global.cloudIdList == null || Global.cloudIdList.size() == 0)
             return;
         for (String str : Global.cloudIdList) {
+            String[] strArr = str.split(";");
+            map.put("Region", strArr[1]);
             map.put("Action", "InstanceIoWriteMonitor");
-            map.put("Id", str);
+            map.put("Id", strArr[0]);
             map.put("StartTime", startDateTime);
             map.put("EndTime", endDateTime);
             Map map1 = new HashMap(map);

@@ -24,9 +24,14 @@ public class LoadBalancerHandleImpl implements MessageHandle{
         JSONObject jsonObject = JSONObject.parseObject(msg);
         Cloud cloud = JSON.toJavaObject(jsonObject, Cloud.class);
 
-        if (cloud.getData() == null || ((JSONObject) cloud.getData()).size() == 0)
+        if (cloud.getData() == null)
             return null;
-        List list = (List) cloud.getData();
+        List list = null;
+        try {
+            list = (List) cloud.getData();
+        } catch (ClassCastException e) {
+            return null;
+        }
         if (list == null || list.size() == 0)
             return null;
         List list1 = (List) list.get(0);

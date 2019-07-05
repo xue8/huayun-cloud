@@ -39,14 +39,14 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + id +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + username +
                     "\"\n" +
@@ -88,14 +88,14 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + id +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + username +
                     "\"\n" +
@@ -140,14 +140,14 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + id +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + username +
                     "\"\n" +
@@ -189,14 +189,14 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + id +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + username +
                     "\"\n" +
@@ -241,14 +241,14 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + id +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + username +
                     "\"\n" +
@@ -303,14 +303,14 @@ public class ElasticsearchSearchServiceImpl2 implements ElasticsearchSearchServi
                     "    \t\"bool\" : {\n" +
                     "    \t\t\"must\" : [\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"id\" : \""
                     + id +
                     "\"\n" +
                     "\t    \t\t\t}\n" +
                     "    \t\t\t},\n" +
                     "\t\t\t\t{\n" +
-                    "\t    \t\t\t\"match\" : {\n" +
+                    "\t    \t\t\t\"match_phrase\" : {\n" +
                     "\t    \t\t\t\t\"username\" : \""
                     + username +
                     "\"\n" +

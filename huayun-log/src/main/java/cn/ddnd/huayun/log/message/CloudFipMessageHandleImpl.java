@@ -27,6 +27,16 @@ public class CloudFipMessageHandleImpl implements MessageHandle{
         if (cloud.getData() == null)
             return null;
         List list = (List) cloud.getData();
+        try {
+            list.get(0);
+        } catch (Exception e) {
+            return null;
+        }
+        try {
+            list.get(0);
+        } catch (Exception e) {
+            return null;
+        }
         Map map = (Map) list.get(0);
         String ip = (String) map.get("Ip");
         List list1 = (List) map.get("Data");

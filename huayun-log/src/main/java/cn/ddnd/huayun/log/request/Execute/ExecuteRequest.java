@@ -42,7 +42,7 @@ public abstract class ExecuteRequest {
         this.accessKeyId = Global.accessKeyId;
         this.map = new HashMap();
         map.put("Action", "InstanceCpuMonitor");
-        map.put("Region", "cn-huaian");
+//        map.put("Region", "cn-huaian");
         map.put("Date", date);
         map.put("AccessKeyId", accessKeyId);
         map.put("Version", "1.0");

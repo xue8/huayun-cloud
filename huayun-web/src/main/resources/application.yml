@@ -14,9 +14,9 @@ spring:
   redis:
     host: 127.0.0.1
   mail:
-    host: smtp.163.com
-    username: 18589831291@163.com
-    password: 123123qwe #gzhogknhbmfebgbi #123123qwe
+    host: smtp.sina.com
+    username: dodoname@sina.com
+    password: 3531529 #gzhogknhbmfebgbi #123123qwe
     protocol: smtp
     properties: {"mail.smtp.auth":"true", "mail.smtp.ssl.enable":"true", "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory"}
   datasource:
@@ -56,7 +56,7 @@ global:
     routing-key:
   monitor:
     title: 云主机告急提示 【华云】
-    email: 18589831291@163.com
+    email: dodoname@sina.com
   msm:
     app-code: 0a3e3bbf4b5f4f7599063eabb424ab76
 

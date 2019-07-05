@@ -32,9 +32,10 @@ public class ExecuteReuqestloadBalancerIn extends ExecuteRequest{
         if (Global.lbIdList == null || Global.lbIdList.size() == 0)
             return;
         for (String str : Global.lbIdList) {
+            String[] strArr = str.split(";");
+            map.put("Region", strArr[1]);
             map.put("Action", "LbVipBytesInMnt");
-            map.put("Region", "cn-chengdu");
-            map.put("Id", str);
+            map.put("Id", strArr[0]);
             map.put("StartTime", startDateTime);
             map.put("EndTime", endDateTime);
             Map map1 = new HashMap(map);

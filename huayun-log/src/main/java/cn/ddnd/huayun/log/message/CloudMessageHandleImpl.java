@@ -26,9 +26,19 @@ public class CloudMessageHandleImpl implements MessageHandle {
 
         if (cloud.getData() == null)
             return null;
+        try {
+            List<List<Object>> lists1 = (List<List<Object>>) cloud.getData();
+        } catch (Exception e) {
+            return null;
+        }
         List<List<Object>> lists = (List<List<Object>>) cloud.getData();
         if (lists.size() == 0 || lists == null)
             return null;
+        try {
+            lists.get(0);
+        } catch (Exception e) {
+            return null;
+        }
         String datetime = (String) lists.get(0).get(0);
         Double used = Double.valueOf(lists.get(0).get(1).toString());
 

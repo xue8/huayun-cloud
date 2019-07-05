@@ -29,6 +29,11 @@ public class CloudDiskMessageHandleImpl implements MessageHandle{
         List list = (List) cloud.getData();
         if (list.size() == 0 || list == null)
             return null;
+        try {
+            list.get(0);
+        } catch (Exception e) {
+            return null;
+        }
         Map map = (Map) list.get(0);
         String tag = (String) map.get("Tag");
         List list1 = (List) map.get("Data");

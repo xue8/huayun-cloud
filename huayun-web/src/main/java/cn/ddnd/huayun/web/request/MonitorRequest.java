@@ -51,14 +51,14 @@ public class MonitorRequest {
                 "                        \"bool\":{\n" +
                 "                            \"must\":[\n" +
                 "                                {\n" +
-                "                                    \"match\":{\n" +
+                "                                    \"match_phrase\":{\n" +
                 "                                        \"id\":\""
                 + builder.id +
                 "\"\n" +
                 "                                    }\n" +
                 "                                },\n" +
                 "                                {\n" +
-                "                                    \"match\":{\n" +
+                "                                    \"match_phrase\":{\n" +
                 "                                        \"username\":\""
                 + builder.username +
                 "\"\n" +
